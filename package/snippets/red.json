@@ -1,0 +1,256 @@
+{
+    "Red [Title]": {
+        "prefix": "red [title]",
+		"body": [
+            "Red [",
+            "    Title: \"$1\"",
+            "]"
+		],
+        "description": "Red [ Title ]"
+    },
+    "Red [Title NeedsView]": {
+        "prefix": "red [title needsview]",
+		"body": [
+            "Red [",
+            "    Title: \"$1\"",
+            "    Needs: 'View",
+            "]"
+		],
+		"description": "Red [ Title NeedsView ]"
+    },
+    "all []": {
+        "prefix": "all []",
+		"body": ["all [$1]"],
+		"description": "all [ condition1 condition2 conditionN ]"
+    },
+    "any []": {
+        "prefix": "any []",
+		"body": ["any [$1]"],
+		"description": "any [ condition1 condition2 conditionN ]"
+    },
+    "case []": {
+        "prefix": "case []",
+		"body": [
+            "case [",
+            "    ${condition1} []",
+            "    ${condition2} []",
+            "    true []",
+            "]"      
+		],
+		"description": "case [ condition1 [ ] condition2 [ ] true [ ] ]"
+    },
+    "catch []": {
+        "prefix": "catch []",
+		"body": [
+            "catch [",
+            "    $1",
+            "]"
+		],
+		"description": "catch [ ]"
+    },
+    "comment []": {
+        "prefix": "comment []",
+		"body": [
+            "comment [",
+            "    $1",
+            "]"
+		],
+		"description": "comment [ ]"
+    },
+    "compose []": {
+        "prefix": "compose []",
+        "body": ["compose [$1]"],
+		"description": "compose [ ]"
+    },
+    "context []": {
+        "prefix": "context []",
+		"body": [
+            "context [",
+            "    $1",
+            "]"
+		],
+		"description": "context [ ]"
+    },
+    "does []": {
+        "prefix": "does []",
+		"body": [
+            "does [",
+            "    $1",
+            "]"
+		],
+		"description": "does [ ]"
+    },
+    "either [][]": {
+        "prefix": "either [][]",
+		"body": [
+            "either ${condition} [",
+            "    $1",
+            "][",
+            "    ",
+            "]"
+		],
+		"description": "either condition [ ][ ]"
+    },
+    "forall []": {
+        "prefix": "forall []",
+		"body": [
+            "forall ${series} [",
+            "    $1",
+            "]"
+		],
+		"description": "forall series [ ]"
+    },
+    "foreach []": {
+        "prefix": "foreach []",
+		"body": [
+            "foreach ${iteration} ${series} [",
+            "    $1",
+            "]"
+		],
+		"description": "foreach iteration series [ ]"
+    },
+    "forever []": {
+        "prefix": "forever []",
+		"body": [
+            "forever [",
+            "    $1",
+            "]"
+		],
+		"description": "forever [ ]"
+    },
+    "func []": {
+        "prefix": "func []",
+		"body": [
+            "func [${arg}][",
+            "    $1",
+            "]"
+		],
+		"description": "func [ arg1 arg2 argN ][ ]"
+    },
+    "function []": {
+        "prefix": "function []",
+		"body": [
+            "function [${arg}][",
+            "    $1",
+            "]"
+		],
+		"description": "function [ arg1 arg2 argN ][ ]"
+    },
+    "has []": {
+        "prefix": "has []",
+		"body": [
+            "has [${var}][",
+            "    $1",
+            "]"
+		],
+		"description": "has [ var1 var2 varN ][ ]"
+    },
+    "if []": {
+        "prefix": "if []",
+		"body": [
+            "if ${condition} [",
+            "    $1",
+            "]"
+		],
+		"description": "if condition [ ]"
+    },
+    "loop []": {
+        "prefix": "loop []",
+		"body": [
+            "loop ${count} [",
+            "    $1",
+            "]"
+		],
+		"description": "loop count [ ]"
+    },
+    "make object! []": {
+        "prefix": "make object! []",
+		"body": [
+            "make object! [",
+            "    $1",
+            "]"
+		],
+		"description": "make object! [ ]"
+    },
+    "parse []": {
+        "prefix": "parse []",
+		"body": [
+            "parse ${series} [",
+            "    ${rule}",
+            "]"
+		],
+		"description": "parse series [ rule1 rule2 ruleN ]"
+    },
+    "parse-trace []": {
+        "prefix": "parse-trace []",
+		"body": [
+            "parse-trace ${series} [",
+            "    ${rule}",
+            "]"
+		],
+		"description": "parse-trace series [ rule1 rule2 ruleN ]"
+    },
+    "reduce []": {
+        "prefix": "reduce []",
+        "body": ["reduce [$1]"],
+		"description": "reduce [ ]"
+    },
+    "repeat []": {
+        "prefix": "repeat []",
+		"body": [
+            "repeat ${iteration} ${count} [",
+            "    $1",
+            "]"
+		],
+		"description": "repeat iteration count [ ]"
+    },
+    "switch []": {
+        "prefix": "switch/default []",
+		"body": [
+            "switch/default ${value} [",
+            "    ${equal1} []",
+            "    ${equal2} []",
+            "][",
+            "    ",
+            "]"
+		],
+		"description": "switch/default value [ equal1 [ ] equal2 [ ] ][ ]"
+    },
+    "try []": {
+        "prefix": "try []",
+		"body": [
+            "try [",
+            "    $1",
+            "]"
+		],
+		"description": "try [ ]"
+    },
+    "unless []": {
+        "prefix": "unless []",
+		"body": [
+            "unless ${condition} [",
+            "    $1",
+            "]"
+		],
+		"description": "unless condition [ ]"
+    },
+    "until []": {
+        "prefix": "until []",
+		"body": [
+            "until [",
+            "    ",
+            "    ${condition}",
+            "]"
+		],
+		"description": "until [ condition ]"
+    },
+    "while []": {
+        "prefix": "while []",
+		"body": [
+            "while [${condition}] [",
+            "    $1",
+            "]"
+		],
+		"description": "while [ condition ] [ ]"
+    }
+} 
