@@ -91,7 +91,18 @@ function handle_command(command) {
                     cp.exec('chmod 777 ' + red_bin_path);
                 }
                 red_bin_exist = true;
-                vscode.window.showInformationMessage('Download finish, you can interpret or compile now. (the first time run will spend more time).');
+                vscode.window.showInformationMessage('Please wait, compile gui-console...');
+                var str = red_bin_path + ' ' + red_extensionPath + '/bin/' + process.platform + '/keep-me.red';
+                cp.exec(str, null, function (error, stdout, stderr) {
+                    var output;
+                    if (error != null) {
+                        //output = error.message;
+                    }
+                    else {
+                        output = 'You can interpret or compile now!';
+                    }
+                    vscode.window.showInformationMessage(output);
+                });
             } else {
                 vscode.window.showInformationMessage(arguments[0]);
             }
@@ -163,7 +174,7 @@ function activate(context) {
     //mkdirpSync(red_bin_path);
     red_bin_path = red_bin_path + 'red' + _exe;
     try {
-        fs.accessSync(red_bin_path, fs.F_OK);
+        fs.accessSync(red_bin_path, fs.X_OK);
         red_bin_exist = true;
     } catch (e) {
         //
