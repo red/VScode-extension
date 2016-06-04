@@ -61,7 +61,7 @@
         "onCommand:red_compile_gui",
         "onCommand:red_call_compile_result"
     ],
-    "main": "./out/src/extension",
+    "main": "./src/extension.ts",
     "scripts": {
         "vscode:prepublish": "node ./node_modules/vscode/bin/compile",
         "compile": "node ./node_modules/vscode/bin/compile -watch -p ./"
