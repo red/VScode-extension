@@ -5,40 +5,41 @@
     "icon": "images/red.png",
     "version": "0.0.4",
     "publisher": "red-auto",
-	"bugs": {
-        "url": "https://github.com/red-auto/red-vscode/issues"
-	},
-    "engines": {
-        "vscode": "^0.10.10"
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/red/VScode-extension"
+    },
+    "bugs": {
+        "url": "https://github.com/red/VScode-extension/issues"
     },
     "categories": [
         "Languages","Snippets","Themes","Other"
     ],
     "contributes": {
         "languages": [{
-            "id": "red",
-            "aliases": ["Red", "red"],
-            "extensions": [".red"],
+            "id":            "red",
+            "aliases":       ["Red", "red"],
+            "extensions":    [".red"],
             "configuration": "./languages/red.configuration.json"
         }],
         "grammars": [{
-            "language": "red",
+            "language":  "red",
             "scopeName": "source.red",
-            "path": "./grammars/red.tmLanguage"
+            "path":      "./grammars/red.tmLanguage"
         }],
-		"snippets": [
-			{
-				"language": "red",
-				"path": "./snippets/red.json"
-			}
-		],
-		"themes": [
-			{
-				"label": "Red Language Theme 1",
-				"uiTheme": "vs",
-				"path": "./themes/RedLangTheme1.tmTheme"
-			}
-		],
+        "snippets": [
+            {
+                "language": "red",
+                "path":     "./snippets/red.json"
+            }
+        ],
+        "themes": [
+            {
+                "label":   "Red Language Theme 1",
+                "uiTheme": "vs",
+                "path":    "./themes/RedLangTheme1.tmTheme"
+            }
+        ],
         "commands": [
             {"command": "red_menu"                ,"title": "Menu"},
             {"command": "red_interpret"           ,"title": "Interpret"},
@@ -61,13 +62,17 @@
         "onCommand:red_compile_gui",
         "onCommand:red_call_compile_result"
     ],
+    "engines": {
+        "vscode": "^0.10.10"
+    },
     "main": "./out/src/extension",
     "scripts": {
         "vscode:prepublish": "node ./node_modules/vscode/bin/compile",
-        "compile": "node ./node_modules/vscode/bin/compile -watch -p ./"
+        "compile":           "node ./node_modules/vscode/bin/compile -watch -p ./",
+        "postinstall":       "node ./node_modules/vscode/bin/install"
     },
     "devDependencies": {
-        "typescript": "^1.6.2",
-        "vscode": "0.10.x"
+        "typescript": "^1.8.5",
+        "vscode":     "^0.11.0"
     }
 }
