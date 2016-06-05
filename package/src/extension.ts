@@ -1,10 +1,10 @@
-"use strict";
+'use strict';
 
-var vscode = require('vscode');
-var fs = require('fs');
-var path = require('path');
-var http = require('http'); //module 'request' supports redirects, but error here
-var cp = require('child_process');
+import * as vscode        from 'vscode';
+import * as fs            from 'fs';
+import * as path          from 'path';
+import * as http          from 'http';
+import * as child_process from 'child_process';
 
 var red_outputChannel1 = vscode.window.createOutputChannel('red_outputChannel1');
 var red_extensionPath = '';
@@ -35,7 +35,8 @@ function http_download(url, dest, cb) {
         }
         response.pipe(file);
         file.on('finish', function() {
-            file.close(cb);
+            file.close();
+            return cb();
         });
     });
     request.on('error', function (err) {
@@ -46,7 +47,7 @@ function http_download(url, dest, cb) {
         fs.unlink(dest);
         return cb(err.message);
     });
-};
+}
 function exec_os(arg) {
     var str = red_bin_path;
     switch(process.platform) {
@@ -68,7 +69,7 @@ function exec_os(arg) {
         str = arg;
     }
     red_outputChannel1.append(str + '\r\n'); red_outputChannel1.show();
-    cp.exec(str, null, function (error, stdout, stderr) {
+    child_process.exec(str, null, function (error, stdout, stderr) {
         var output;
         if (error != null) {
             output = error.message;
@@ -79,8 +80,8 @@ function exec_os(arg) {
         }
         red_outputChannel1.append(output); red_outputChannel1.show();
     });
-    
 }
+
 function handle_command(command) {
     if (red_bin_exist == false) {
 	    var url = 'http://static.red-lang.org/dl/auto/' + process.platform.replace('win32', 'win').replace('darwin','mac') + '/red-latest' + _exe;
@@ -88,15 +89,16 @@ function handle_command(command) {
         http_download(url, red_bin_path, function () {
             if (arguments.length == 0) {
                 if (process.platform != 'win32') {
-                    cp.exec('chmod 777 ' + red_bin_path);
+                    child_process.exec('chmod 777 ' + red_bin_path);
                 }
                 red_bin_exist = true;
                 vscode.window.showInformationMessage('Please wait, compile gui-console...');
                 var str = red_bin_path + ' ' + red_extensionPath + '/bin/' + process.platform + '/keep-me.red';
-                cp.exec(str, null, function (error, stdout, stderr) {
+                //child_process.exec(str, null, function (error, stdout, stderr) {
+                child_process.execFile(red_bin_path, [red_extensionPath + '/bin/' + process.platform + '/keep-me.red'], null, function (error, stdout, stderr) {
                     var output;
                     if (error != null) {
-                        //output = error.message;
+                        output = error.message;
                     }
                     else {
                         output = 'You can interpret or compile now!';
@@ -108,19 +110,21 @@ function handle_command(command) {
             }
         });
     } else {
-        if (-1 < red_pkg.contributes.languages[0].extensions.indexOf(vscode.window.activeTextEditor.document.fileName.substr(-4, 4))) {
+        if (-1 < red_pkg['contributes'].languages[0].extensions.indexOf(vscode.window.activeTextEditor.document.fileName.substr(-4, 4))) {
             var arg = '';
             var fileName = vscode.window.activeTextEditor.document.fileName;
             var executable = true;
             switch(command) {
                 case 'red_menu': {
                     vscode.window.showQuickPick(red_menu).then(function (menu_item) {
-                        red_pkg.contributes.commands.some(function(element1,index1,array1){
-                            if (element1.title == menu_item.substr(0, menu_item.lastIndexOf('(') - 1)) {
-                                handle_command(element1.command);
-                                return true;
-                            }
-                        });
+                        if (menu_item != null) {
+                            red_pkg['contributes'].commands.some(function(element1,index1,array1){
+                                if (element1.title == menu_item.substr(0, menu_item.lastIndexOf('(') - 1)) {
+                                    handle_command(element1.command);
+                                    return true;
+                                }
+                            });
+                        }
                     });
                     executable = false;
                 } break;
@@ -151,11 +155,12 @@ function handle_command(command) {
         }
     }
 }
-function activate(context) {
+
+export function activate(context: vscode.ExtensionContext) {
     red_extensionPath = context.extensionPath;
     red_pkg = JSON.parse(fs.readFileSync(red_extensionPath + '/package.json', 'utf8'));
-    red_pkg.contributes.commands.forEach(function(element1,index1,array1){
-        red_pkg.contributes.keybindings.some(function(element2,index2,array3){ //forEach can not use break
+    red_pkg['contributes'].commands.forEach(function(element1,index1,array1){
+        red_pkg['contributes'].keybindings.some(function(element2,index2,array3){ //forEach can not use break
             if (element1.command == element2.command) {
                 if (element1.command != 'red_menu') {
                     red_menu.push(element1.title + ' (' + element2.key + ')');
@@ -180,4 +185,6 @@ function activate(context) {
         //
     }
 }
-exports.activate = activate;
+
+export function deactivate() {
+}
