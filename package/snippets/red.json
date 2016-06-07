@@ -48,14 +48,14 @@
 		],
 		"description": "catch [ ]"
     },
-    "comment []": {
-        "prefix": "comment []",
+    "comment {}": {
+        "prefix": "comment {}",
 		"body": [
-            "comment [",
+            "comment {",
             "    $1",
-            "]"
+            "}"
 		],
-		"description": "comment [ ]"
+		"description": "comment { }"
     },
     "compose []": {
         "prefix": "compose []",
