@@ -173,6 +173,7 @@ export function activate(context: vscode.ExtensionContext) {
     
     if ('win32' == process.platform) {
         _exe = '.exe';
+        child_process.stdout.setEncoding('ucs2');
     }
     red_bin_path = red_extensionPath + '/bin/' + process.platform + '/';
     //fs.existsSync(red_bin_path) || fs.mkdirSync(red_bin_path);
