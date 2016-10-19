@@ -1,0 +1,530 @@
+{
+	"name": "Red",
+	"scopeName": "source.red",
+	"uuid": "6BE0E13B-C4DD-478F-953A-2D84DBBCA2BA",
+	"fileTypes": [
+		"red",
+		"reds"
+	],
+	"patterns": [
+		{
+			"include": "#comments"
+		},
+		{
+			"include": "#type-literal"
+		},
+		{
+			"include": "#logic"
+		},
+		{
+			"include": "#strings"
+		},
+		{
+			"include": "#values"
+		},
+		{
+			"include": "#words"
+		},
+		{
+			"include": "#errors"
+		}
+	],
+	"repository": {
+		"binary-base-sixteen": {
+			"begin": "(16)?#\\{",
+			"end": "\\}",
+			"name": "string.other.base16.red",
+			"patterns": [
+				{
+					"match": "[0-9a-fA-F]*",
+					"name": "constant.character.binary.red"
+				}
+			]
+		},
+		"binary-base-sixtyfour": {
+			"begin": "64#\\{",
+			"end": "\\}",
+			"name": "string.other.base64.red"
+		},
+		"binary-base-two": {
+			"begin": "2#\\{",
+			"end": "\\}",
+			"name": "string.other.base2.red",
+			"patterns": [
+				{
+					"match": "[01]*",
+					"name": "constant.character.binary.red"
+				}
+			]
+		},
+		"block-blocks": {
+			"begin": "(\\[)",
+			"beginCaptures": {
+				"0": {
+					"name": "punctuation.section.embedded.begin.red"
+				}
+			},
+			"end": "(\\])",
+			"endCaptures": {
+				"0": {
+					"name": "punctuation.section.embedded.end.red"
+				}
+			},
+			"name": "meta.group.block.red",
+			"patterns": [
+				{
+					"include": "$self"
+				}
+			]
+		},
+		"block-parens": {
+			"begin": "\\(",
+			"end": "\\)",
+			"name": "meta.group.paren.red",
+			"patterns": [
+				{
+					"include": "$self"
+				}
+			]
+		},
+		"blocks": {
+			"patterns": [
+				{
+					"include": "#block-blocks"
+				},
+				{
+					"include": "#block-parens"
+				}
+			]
+		},
+		"character": {
+			"match": "#\"(\\^(\\(([0-9a-fA-F]{2,4}|[a-zA-Z]{3,6})\\)|.)|[^\\^\\\"])\"",
+			"name": "constant.other.character.red"
+		},
+		"character-html": {
+			"captures": {
+				"1": {
+					"name": "punctuation.definition.entity.html"
+				},
+				"3": {
+					"name": "punctuation.definition.entity.html"
+				}
+			},
+			"match": "(&)([a-zA-Z0-9]+|#[0-9]+|#x[0-9a-fA-F]+)(;)",
+			"name": "constant.character.entity.html"
+		},
+		"character-inline": {
+			"match": "\\^(\\([0-9a-fA-F]{2,4}\\)|.)",
+			"name": "constant.character.red"
+		},
+		"comment-line": {
+			"match": ";([^%\\n]|%(?!>))*",
+			"name": "comment.line.semicolon.red"
+		},
+		"comment-multiline-block": {
+			"begin": "comment\\s*\\[",
+			"end": "\\]",
+			"name": "comment.block.red",
+			"patterns": [
+				{
+					"include": "#comment-multiline-block-nested"
+				}
+			]
+		},
+		"comment-multiline-block-nested": {
+			"begin": "\\[",
+			"end": "\\]",
+			"name": "comment.block.red",
+			"patterns": [
+				{
+					"include": "#comment-multiline-block-nested"
+				}
+			]
+		},
+		"comment-multiline-string": {
+			"begin": "comment\\s*\\{",
+			"end": "\\}",
+			"name": "comment.block.red",
+			"patterns": [
+				{
+					"include": "#comment-multiline-string-nested"
+				}
+			]
+		},
+		"comment-multiline-string-nested": {
+			"begin": "\\{",
+			"end": "\\}",
+			"name": "comment.block.red",
+			"patterns": [
+				{
+					"include": "#comment-multiline-string-nested"
+				}
+			]
+		},
+		"comment-tag": {
+			"begin": "(?<=^|[\\s\\[\\]()}\"])<!--",
+			"end": "-->",
+			"name": "comment.block.tag.red"
+		},
+		"comments": {
+			"patterns": [
+				{
+					"include": "#comment-shebang"
+				},
+				{
+					"include": "#comment-line"
+				},
+				{
+					"include": "#comment-multiline-string"
+				},
+				{
+					"include": "#comment-multiline-block"
+				},
+				{
+					"include": "#comment-tag"
+				}
+			]
+		},
+		"comments-shebang": {
+			"match": "^#!/.*red.*",
+			"name": "comment.line.shebang.red"
+		},
+		"error-commas": {
+			"match": ",",
+			"name": "invalid.illegal.comma.red"
+		},
+		"errors": {
+			"patterns": [
+				{
+					"include": "#error-commas"
+				}
+			]
+		},
+		"logic": {
+			"match": "#\\[(true|false|none)]",
+			"name": "constant.language.logic.red"
+		},
+		"string-email": {
+			"match": "[^\\s\\n:/\\[\\]\\(\\)]+@[^\\s\\n:/\\[\\]\\(\\)]+",
+			"name": "string.email.red"
+		},
+		"string-file": {
+			"match": "%[^\\s\\n\\[\\]\\(\\)]*",
+			"name": "string.other.file.red"
+		},
+		"string-file-quoted": {
+			"begin": "%\"",
+			"end": "\"",
+			"name": "string.other.file.red",
+			"patterns": [
+				{
+					"match": "%[A-Fa-f0-9]{2}",
+					"name": "constant.character.hex.red"
+				}
+			]
+		},
+		"string-issue": {
+			"match": "#[^\\s\\n\\[\\]\\(\\)]*",
+			"name": "string.other.issue.red"
+		},
+		"string-multiline": {
+			"begin": "\\{",
+			"end": "\\}",
+			"name": "string.other.red",
+			"patterns": [
+				{
+					"include": "#string-rsp-tag"
+				},
+				{
+					"include": "#character-inline"
+				},
+				{
+					"include": "#character-html"
+				},
+				{
+					"include": "#string-nested-multiline"
+				}
+			]
+		},
+		"string-nested-multiline": {
+			"begin": "\\{",
+			"end": "\\}",
+			"name": "string.other.red",
+			"patterns": [
+				{
+					"include": "#string-nested-multiline"
+				}
+			]
+		},
+		"string-quoted": {
+			"begin": "\"",
+			"end": "\"",
+			"name": "string.quoted.red",
+			"patterns": [
+				{
+					"include": "#string-rsp-tag"
+				},
+				{
+					"include": "#character-inline"
+				},
+				{
+					"include": "#character-html"
+				}
+			]
+		},
+		"string-rsp-tag": {
+			"begin": "<%(==?|:|!)? ",
+			"end": " %>",
+			"name": "source.red.embedded.block.html",
+			"patterns": [
+				{
+					"include": "source.red"
+				}
+			]
+		},
+		"string-tag": {
+			"begin": "<(?:\\/|%={0,2}\\ |\\!)?(?:([-_a-zA-Z0-9]+):)?([-_a-zA-Z0-9:]+)",
+			"captures": {
+				"1": {
+					"name": "entity.other.namespace.xml"
+				},
+				"2": {
+					"name": "entity.name.tag.xml"
+				}
+			},
+			"end": "(?:\\s/|\\ %)?>",
+			"name": "meta.tag.red",
+			"patterns": [
+				{
+					"captures": {
+						"1": {
+							"name": "entity.other.namespace.xml"
+						},
+						"2": {
+							"name": "entity.other.attribute-name.xml"
+						}
+					},
+					"match": " (?:([-_a-zA-Z0-9]+):)?([_a-zA-Z-]+)"
+				},
+				{
+					"include": "#string-tag-double-quoted"
+				},
+				{
+					"include": "#string-tag-single-quoted"
+				}
+			]
+		},
+		"string-tag-double-quoted": {
+			"begin": "\"",
+			"end": "\"",
+			"name": "string.quoted.double.xml"
+		},
+		"string-tag-single-quoted": {
+			"begin": "'",
+			"end": "'",
+			"name": "string.quoted.single.xml"
+		},
+		"string-url": {
+			"match": "[A-Za-z][\\w-]{1,15}:(/{0,3}[^\\s\\n\\[\\]\\(\\)]+|//)",
+			"name": "string.other.url.red"
+		},
+		"strings": {
+			"patterns": [
+				{
+					"include": "#character"
+				},
+				{
+					"include": "#string-quoted"
+				},
+				{
+					"include": "#string-multiline"
+				},
+				{
+					"include": "#string-tag"
+				},
+				{
+					"include": "#string-file-quoted"
+				},
+				{
+					"include": "#string-file"
+				},
+				{
+					"include": "#string-url"
+				},
+				{
+					"include": "#string-email"
+				},
+				{
+					"include": "#binary-base-two"
+				},
+				{
+					"include": "#binary-base-sixty-four"
+				},
+				{
+					"include": "#binary-base-sixteen"
+				},
+				{
+					"include": "#string-issue"
+				}
+			]
+		},
+		"type-literal": {
+			"begin": "#\\[(?:(\\w+!))",
+			"captures": {
+				"1": {
+					"name": "keyword.control.datatype.red"
+				}
+			},
+			"end": "]",
+			"name": "meta.literal.red",
+			"patterns": [
+				{
+					"include": "$self"
+				}
+			]
+		},
+		"value-date": {
+			"match": "\\d{1,4}\\-(Jan(u(a(ry?)?)?)?|Feb(u(a(ry?)?)?)?|Mar(ch?)?|Apr(il?)?|May|June?|July?|Aug(u(st?)?)?|Sep(t(e(m(b(er?)?)?)?)?)?|Oct(o(b(er?)?)?)?|Nov(e(m(b(er?)?)?)?)?|Dec(e(m(b(er?)?)?)?)?|[1-9]|1[012])\\-\\d{1,4}(/\\d{1,2}[:]\\d{1,2}([:]\\d{1,2}(\\.\\d{1,5})?)?([+-]\\d{1,2}[:]\\d{1,2})?)?",
+			"name": "constant.other.date.red"
+		},
+		"value-money": {
+			"match": "(?<!\\w)-?[a-zA-Z]*\\$[0-9]+(\\.[0-9]{2})?",
+			"name": "constant.numeric.money.red"
+		},
+		"value-number": {
+			"match": "(?<![\\w.,])([-+]?((\\d+[\\d']*[.,]?[\\d']*)|([.,]\\d+[\\d']*))((e|E)(\\+|-)?\\d+)?)(?=\\W)",
+			"name": "constant.numeric.red"
+		},
+		"value-pair": {
+			"match": "(?<!\\w)[-+]?[[:digit:]]+[x][-+]?[[:digit:]]+",
+			"name": "constant.numeric.pair.red"
+		},
+		"value-time": {
+			"match": "([-+]?[:]\\d{1,2}([aApP][mM])?)|([-+]?[:]\\d{1,2}[.]\\d{0,9})|([-+]?\\d{1,2}[:]\\d{1,2}([aApP][mM])?)|([-+]?\\d{1,2}[:]\\d{1,2}[.]\\d{0,9})|([-+]?\\d{1,2}[:]\\d{1,2}[:]\\d{1,2}([.]\\d{0,9})?([aApP][mM])?)(?!\\w)",
+			"name": "constant.numeric.time.red"
+		},
+		"value-tuple": {
+			"match": "(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){2,9}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.?",
+			"name": "constant.rgb-value.red"
+		},
+		"values": {
+			"patterns": [
+				{
+					"include": "#value-date"
+				},
+				{
+					"include": "#value-time"
+				},
+				{
+					"include": "#value-tuple"
+				},
+				{
+					"include": "#value-number"
+				},
+				{
+					"include": "#value-pair"
+				},
+				{
+					"include": "#value-money"
+				}
+			]
+		},
+		"word-datatype": {
+			"match": "(?<=^|[\\s\\[\\]()}\"/])[A-Za-z=\\-\\?\\!\\_\\*\\+\\.`~\\&][A-Za-z0-9=\\-\\!\\?\\_\\*\\+\\.`~\\&]*(/([A-Za-z=\\-\\?\\!\\_\\*\\+\\.`~][A-Za-z0-9=\\-\\!\\?\\_\\*\\+\\.`~]*|\\d+))*\\!",
+			"name": "storage.type.cs.red"
+		},
+		"word-set": {
+			"match": "[A-Za-z=\\-\\?\\!\\_\\*\\+\\.`~\\&][A-Za-z0-9=\\-\\!\\?\\_\\*\\+\\.`~&]*(/([A-Za-z=\\-\\?\\!\\_\\*\\+\\.`~\\&][A-Za-z0-9=\\-\\!\\?\\_\\*\\+\\.`~&]*|\\d+))*:",
+			"name": "variable.name.red"
+		},
+		"word-get": {
+			"match": ":[A-Za-z=\\-\\?\\!\\_\\*\\+\\.`~\\&][A-Za-z0-9=\\-\\!\\?\\_\\*\\+\\.`~&]*(/([A-Za-z=\\-\\?\\!\\_\\*\\+\\.`~\\&][A-Za-z0-9=\\-\\!\\?\\_\\*\\+\\.`~&]*|\\d+)*)*",
+			"name": "variable.other.getword.red"
+		},
+		"word-header": {
+			"match": "(?<=^\\[|^)(Red|Red(/System)?)(?=\\s*\\[)",
+			"name": "keyword.control.header.red"
+		},
+		"word-infix": {
+			"match": "(?<=^|[\\s\\[\\]()}\"])(\\+\\+?|--?|\\*\\*?|//?|=|>=?|<(=|>)?)(?=[\\s\\[\\](){\"])",
+			"name": "keyword.operator.arithmetic.red"
+		},
+		"word-lit": {
+			"match": "(?<=^|[\\s\\[\\]()}\"/])'[A-Za-z=\\-\\?\\!\\_\\*\\+\\.`~\\&][A-Za-z0-9=\\-\\!\\?\\_\\*\\+\\.`~\\&]*(/([A-Za-z=\\-\\?\\!\\_\\*\\+\\.`~][A-Za-z0-9=\\-\\!\\?\\_\\*\\+\\.`~]*|\\d+))*",
+			"name": "constant.other.litword.red"
+		},
+		"word-logic": {
+			"match": "(?<=^|[\\s\\[\\]()}\"])(true|yes|false|off|none|no)(?=[\\s\\[\\](){\"])",
+			"name": "constant.other.logic.red"
+		},
+		"word-native": {
+			"match": "(?<=^|[\\s\\[\\]()}\"])(about|abs|absolute|action\\?|add|alert|alias|all|alter|and~|and|any|any-block\\?|any-function\\?|any-string\\?|any-type\\?|any-word\\?|append|arccosine|arcsine|arctangent|array|as|ask|at|back|binary\\?|bind|bitset\\?|block\\?|body-of|boot-prefs|browse|build-tag|call|caret-to-offset|center-face|change|change-dir|char\\?|charset|checksum|choose|clean-path|clear|clear-fields|close|closure|collect|comment|complement|compose|compress|confine|confirm|connected\\?|context|continue-post|copy|cosine|cp|crypt-strength\\?|cvs-date|cvs-version|datatype\\?|date\\?|debase|declare|decimal\\?|decode-cgi|decode-url|decompress|deflag-face|dehex|delete|demo|desktop|detab|dh-compute-key|dh-generate-key|dh-make-key|difference|dir\\?|dirize|disarm|dispatch|divide|do|do-boot|do-events|do-face|do-face-alt|does|dsa-generate-key|dsa-make-key|dsa-make-signature|dsa-verify-signature|dump-face|dump-pane|echo|editor|email\\?|emailer|empty\\?|enbase|entab|equal\\?|error\\?|even\\?|event\\?|exclude|exists-thru\\?|exists\\?|exit|exp|extract|fifth|file\\?|find|find-key-face|find-window|first|flag-face|flag-face\\?|flash|focus|for|forall|foreach|forever|form|forskip|found\\?|fourth|free|func|function\\??|get|get-env|get-modes|get-net-info|get-style|get-word\\?|greater-or-equal\\?|greater\\?|halt|has|hash\\?|head\\??|help|hide|hide-popup|image\\?|import-email|in|in-window\\?|index\\?|info\\?|inform|input|input\\?|insert|insert-event-func|inside\\?|integer\\?|intersect|issue\\?|join|keep|last|launch|launch-thru|layout|length\\?|lesser-or-equal\\?|lesser\\?|library\\?|link-app\\?|link\\?|list-dir|list\\?|lit-path\\?|lit-word\\?|load|load-image|load-prefs|load-thru|log-10|log-2|log-e|logic\\?|lowercase|make|make-dir|make-face|max|maximum|maximum-of|min|minimum|minimum-of|modified\\?|mold|money\\?|multiply|native\\?|negate|negative\\?|net-error|next|none\\?|not|not-equal\\?|now|number\\?|object\\?|odd\\?|offset-to-caret|offset\\?|op\\?|open|open-events|or|or~|outside\\?|pair\\?|paren\\?|parse|parse-email-addrs|parse-header|parse-header-date|parse-xml|path-thru|path\\?|pick|poke|port\\?|positive\\?|power|prin|print|probe|protect|protect-system|q|query|quit|random|read|read-io|read-net|read-thru|reboot|recycle|reduce|refinement\\?|reform|rejoin|remainder|remold|remove|remove-event-func|rename|repeat|repend|replace|request|request-color|request-date|request-download|request-file|request-list|request-pass|request-text|resend|return:|reverse|routine\\??|rsa-encrypt|rsa-generate-key|rsa-make-key|same\\?|save|save-prefs|save-user|screen-offset\\?|script\\?|scroll-para|second|secure|select|send|series\\?|set|set-env|set-font|set-modes|set-net|set-para|set-path\\?|set-style|set-user|set-user-name|set-word\\?|show|show-popup|sine|size-text|size\\?|skip|sort|source|span\\?|spec-of|split-path|square-root|strict-equal\\?|strict-not-equal\\?|string\\?|struct\\?|stylize|subtract|tag\\?|tail\\??|tangent|textinfo|third|throw-on-error|time\\?|title-of|to|to-local-file|to-red-file|trace|trim|tuple\\?|types-of|type\\?|unfocus|uninstall|union|unique|unprotect|unset|unset\\?|unview|update|upgrade|uppercase|url\\?|usage|use|values-of|value\\?|vbug|view|view-install|view-prefs|view\\?|viewed\\?|wait|what|what-dir|win-offset\\?|within\\?|words-of|word\\?|write|write-io|write-user|xor|xor~|zero\\?|/local|thru|end)(/(?=[A-Za-z=\\-\\?\\!\\_\\*\\+\\.`~\\&])|(?=[\\s\\[\\](){\"]|$))",
+			"name": "storage.type.function.red"
+		},
+		"word-native-to-type": {
+			"match": "(?<=^|[\\s\\[\\]()}\"])(to-binary|to-bitset|to-block|to-char|to-date|to-decimal|to-email|to-event|to-file|to-get-word|to-hash|to-hex|to-idate|to-image|to-integer|to-issue|to-list|to-lit-path|to-lit-word|to-logic|to-money|to-none|to-pair|to-paren|to-path|to-refinement|to-set-path|to-set-word|to-string|to-tag|to-time|to-tuple|to-url|to-word)(?=[\\s\\[\\](){\"]|$)",
+			"name": "constant.other.word.to-type.red"
+		},
+		"word-control-flow": {
+			"match": "(?<=^|[\\s\\[\\]()}\"])(break|continue|return|case|switch|default|if|unless|either|while|loop|until|catch|throw|try)(?=[\\s\\[\\](){\"]|$)",
+			"name": "keyword.control.native.red"
+		},
+		"word-parse": {
+			"match": "(?<=^|[\\s\\[\\]()}\"])(thru|some|opt|end)(?=[\\s\\[\\](){\"]|$)",
+			"name": "keyword.control.parse.red"
+		},
+		"word-qm": {
+			"match": "(?<=^|[\\s\\[\\]()}\"])(qm|route|render|redirect-to|publish|response|validate|verify|get-param|get-cookie|set-cookie|require)(/(?=[A-Za-z=\\-\\?\\!\\_\\*\\+\\.`~\\&])|(?=[\\s\\[\\](){\"]))",
+			"name": "keyword.control.qm.red"
+		},
+		"word-refine": {
+			"match": "/[A-Za-z=`~][A-Za-z0-9=\\-\\!\\?\\_\\*\\.`~]*",
+			"name": "constant.other.word.refinement.red"
+		},
+		"words": {
+			"name": "meta.word.red",
+			"patterns": [
+				{
+					"include": "#word-datatype"
+				},
+				{
+					"include": "#word-set"
+				},
+				{
+					"include": "#word-get"
+				},
+				{
+					"include": "#word-lit"
+				},
+				{
+					"include": "#word-header"
+				},
+				{
+					"include": "#word-native"
+				},
+				{
+					"include": "#word-native-to-type"
+				},
+				{
+					"include": "#word-infix"
+				},
+				{
+					"include": "#word-logic"
+				},
+				{
+					"include": "#word-refine"
+				},
+				{
+					"include": "#word-qm"
+				},
+				{
+					"include": "#word-control-flow"
+				},
+				{
+					"include": "#word"
+				}
+			]
+		}
+	},
+	"version": "https://github.com/yoyocat/red-vscode/commit/47c7f19488476299148785c1d39c32860abfaa5a"
+}

@@ -1,0 +1,77 @@
+{
+    "Red [Title]": {
+        "prefix": "red [title]",
+		"body": [
+            "Red [",
+            "    Title: \"$1\"",
+            "]"
+		],
+        "description": "Red [ Title ]"
+    },
+    "Red [Title NeedsView]": {
+        "prefix": "red [title needsview]",
+		"body": [
+            "Red [",
+            "    Title: \"$1\"",
+            "    Needs: 'View",
+            "]"
+		],
+		"description": "Red [ Title NeedsView ]"
+    },
+    "either [][]": {
+        "prefix": "either [][]",
+		"body": [
+            "either ${condition} [",
+            "    $1",
+            "][",
+            "    ",
+            "]"
+		],
+		"description": "either condition [ ][ ]"
+    },
+    "forall []": {
+        "prefix": "forall []",
+		"body": [
+            "forall ${series} [",
+            "    $1",
+            "]"
+		],
+		"description": "forall series [ ]"
+    },
+    "foreach []": {
+        "prefix": "foreach []",
+		"body": [
+            "foreach ${iteration} ${series} [",
+            "    $1",
+            "]"
+		],
+		"description": "foreach iteration series [ ]"
+    },
+    "func []": {
+        "prefix": "func []",
+		"body": [
+            "func [${arg}][",
+            "    $1",
+            "]"
+		],
+		"description": "func [ arg1 arg2 argN ][ ]"
+    },
+    "function []": {
+        "prefix": "function []",
+		"body": [
+            "function [${arg}][",
+            "    $1",
+            "]"
+		],
+		"description": "function [ arg1 arg2 argN ][ ]"
+    },
+    "while []": {
+        "prefix": "while []",
+		"body": [
+            "while [${condition}] [",
+            "    $1",
+            "]"
+		],
+		"description": "while [ condition ] [ ]"
+    }
+} 
