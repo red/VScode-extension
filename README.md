@@ -11,13 +11,16 @@ An extension with rich support for the [Red language](https://www.red-lang.org/)
 
 * Install the extension
 * If [Red](http://www.red-lang.org/p/download.html) is aleady installed (Note: For Windows user, need to run ```red.exe --cli``` first)
-  + You're ready to use it.
-* Turn off the Auto Completion
-  + You can turn off the autocompletion in the **User or Workspace Settings file (settings.json)** as follows.
 
-```
-"red.autocomplete": false
-```
+  You're ready to use it.
+
+* Turn off the Auto Completion
+
+  You can turn off the autocompletion in the **User or Workspace Settings file (settings.json)** as follows.
+
+  ```
+  "red.autocomplete": false
+  ```
 
 ## Compile Red Source File
 
@@ -25,15 +28,15 @@ For compiling Red source file, you need to configure the path to the Red toolcha
 
 * Specify the full path of the red toolchain
 
-```
-"red.redPath": "/home/user1/tools/red-latest"
-```
+  ```
+  "red.redPath": "/home/user1/tools/red-latest"
+  ```
 
 * Relative to `${workspaceRoot}`, where `${workspaceRoot}` resolves to the current work space (project) directory.
 
-```
-"red.redPath": "${workspaceRoot}/toolchain/red"
-```
+  ```
+  "red.redPath": "${workspaceRoot}/toolchain/red"
+  ```
 
 You can also configure the directory for output files of the compiler. The current work space (project) directory is used by default.
 
@@ -41,15 +44,15 @@ You can also configure the directory for output files of the compiler. The curre
 
 * Specify the full path
 
-```
-"red.buildDir": "/home/user1/debug"
-```
+  ```
+  "red.buildDir": "/home/user1/debug"
+  ```
 
 * Relative to `${workspaceRoot}`
 
-```
-"red.buildDir": "${workspaceRoot}/build/debug"
-```
+  ```
+  "red.buildDir": "${workspaceRoot}/build/debug"
+  ```
 
 ## Shortcuts
 

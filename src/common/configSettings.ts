@@ -127,7 +127,7 @@ export class RedSettings implements IRedSettings {
     private initializeSettings() {
         let redSettings = vscode.workspace.getConfiguration("red");
         this.redPath = systemVariables.resolveAny(redSettings.get<string>("redPath"));
-        this.buildDir = redSettings.get<string>("buildDir");
+        this.buildDir = systemVariables.resolveAny(redSettings.get<string>("buildDir"));
         this.devOptions = redSettings.get<any[]>("devOptions");
         this.devOptions = Array.isArray(this.devOptions) ? this.devOptions : [];
         this.redConsolePath = getRedConsole();
