@@ -9,7 +9,7 @@ import * as settings from './../common/configSettings';
 import * as logger from './../common/logger';
 
 var proc: child_process.ChildProcess;
-var redSettings = new settings.RedSettings();
+var redSettings = settings.RedSettings.getInstance();
 
 const redVSCodeTypeMappings = new Map<string, vscode.CompletionItemKind>();
 var mappings = {
@@ -131,8 +131,8 @@ function handleError(source: string, errorMessage: string) {
 function spawnProcess(dir: string) {
     logger.log("cwd: ", dir);
     try {
-        logger.log('child_process.spawn in redProxy', 'Value of redSettings.redPath is : ' + redSettings.redPath);
-        proc = child_process.spawn(redSettings.redPath, ["completion.red"], {
+        logger.log('child_process.spawn in redProxy', 'Value of redSettings.redConsolePath is : ' + redSettings.redConsolePath);
+        proc = child_process.spawn(redSettings.redConsolePath, ["completion.red"], {
             cwd: dir
         });
     }

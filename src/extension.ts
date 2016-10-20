@@ -9,6 +9,9 @@ import {RedReferenceProvider} from './providers/referenceProvider';
 import {RedRenameProvider} from './providers/renameProvider';
 import {RedSymbolProvider} from './providers/symbolProvider';
 
+import { activateExecInTerminalProvider } from './providers/commandsProvider';
+import { activateRedMenuProvider } from './providers/redMenuProvider';
+
 import * as fs from 'fs';
 import * as settings from './common/configSettings'
 
@@ -18,11 +21,10 @@ let outChannel: vscode.OutputChannel;
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
-    var rootDir = context.asAbsolutePath(".");
-    var redSettings = new settings.RedSettings();
+    let redSettings = settings.RedSettings.getInstance();
 
     if (redSettings.autoComplete) {
-        fs.access(redSettings.redPath, fs.constants.F_OK, function(err) {
+        fs.access(redSettings.redConsolePath, fs.constants.F_OK, function(err) {
             if (!err) {
                 outChannel = vscode.window.createOutputChannel('Red-Lang');
                 outChannel.clear();
@@ -34,6 +36,9 @@ export function activate(context: vscode.ExtensionContext) {
     //context.subscriptions.push(vscode.languages.registerDefinitionProvider(RED, new RedDefinitionProvider(context)));
     //context.subscriptions.push(vscode.languages.registerReferenceProvider(RED, new RedReferenceProvider(context)));
     //context.subscriptions.push(vscode.languages.registerDocumentSymbolProvider(RED, new RedSymbolProvider(context)));
+
+    context.subscriptions.push(activateRedMenuProvider());
+    context.subscriptions.push(...activateExecInTerminalProvider());
 
 	vscode.languages.setLanguageConfiguration(RED_MODE.language, {
 		wordPattern: /(-?\d*\.\d\w*)|([^\`\(\)\[\{\]\}\\\|\;\'\"\,\/\s]+)/g

@@ -7,7 +7,7 @@ let redSettings: settings.IRedSettings;
 class Logger {
     static initializeChannel() {
         if (redSettings) return;
-        redSettings = new settings.RedSettings();
+        redSettings = settings.RedSettings.getInstance();
         if (redSettings.devOptions.indexOf("DEBUG") >= 0) {
             outChannel = vscode.window.createOutputChannel('RedExtLog');
         }

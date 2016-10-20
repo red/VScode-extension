@@ -2,7 +2,7 @@
     "name": "red",
     "displayName": "Red",
     "description": "Syntax Coloring, Intellisense, Snippets and more",
-    "version": "0.1.1",
+    "version": "0.1.2",
     "publisher": "red-auto",
     "license": "BSL-1.0",
     "homepage": "https://github.com/red/VScode-extension/blob/master/README.md",
@@ -23,7 +23,11 @@
         "Other"
     ],
     "activationEvents": [
-        "onLanguage:red"
+        "onLanguage:red",
+        "onCommand:red.interpret",
+        "onCommand:red.interpretGUI",
+        "onCommand:red.compile",
+        "onCommand:red.compileGUI"
     ],
     "main": "./out/src/extension",
     "contributes": {
@@ -38,12 +42,68 @@
             "scopeName": "source.red",
             "path": "./syntaxes/Red.tmLanguage.json"
         }],
-        "snippets": [
-            {
+        "snippets": [{
                 "language": "red",
                 "path":     "./snippets/red.json"
+        }],
+        "commands": [
+            {
+                "command": "red.commandMenu",
+                "title": "Show all Red commands",
+                "category": "Red"
+            },
+            {
+                "command": "red.interpret",
+                "title": "Run Red Script",
+                "category": "Red"
+            },
+            {
+                "command": "red.interpretGUI",
+                "title": "Run Red Script in GUI console",
+                "category": "Red"
+            },
+            {
+                "command": "red.compile",
+                "title": "Compile Red Script",
+                "category": "Red"
+            },
+            {
+                "command": "red.compileGUI",
+                "title": "Compile Red Script in GUI mode",
+                "category": "Red"
             }
         ],
+        "keybindings": [
+            {"command": "red.interpret",    "key": "F6"},
+            {"command": "red.compile",      "key": "F7"},
+            {"command": "red.commandMenu",  "key": "ctrl+k ctrl+m"}
+        ],
+        "menus": {
+          "editor/context": [
+            {
+              "when": "resourceLangId == red",
+              "command": "red.interpret",
+              "group": "Red"
+            },
+            {
+              "when": "resourceLangId == red",
+              "command": "red.compile",
+              "group": "Red"
+            }
+          ],
+          "explorer/context": [
+            {
+              "when": "resourceLangId == red",
+              "command": "red.interpret",
+              "group": "Red"
+            },
+            {
+              "when": "resourceLangId == red",
+              "command": "red.compile",
+              "group": "Red"
+            }
+          ]
+        },
         "configuration": {
             "type": "object",
             "title": "Red Configuration",
@@ -51,7 +111,12 @@
                 "red.redPath": {
                     "type": "string",
                     "default": "",
-                    "description": "Path to Red, you can use a custom version of Red by modifying this setting to include the full path."
+                    "description": "Path to Red toolchain"
+                },
+                "red.buildDir": {
+                    "type": "string",
+                    "default": "",
+                    "description": "Directory to put compiling result of Red Source file. If not set, use workspace root directory by default."
                 },
                 "red.devOptions": {
                     "type": "array",
