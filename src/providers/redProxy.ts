@@ -147,7 +147,7 @@ function spawnProcess(dir: string) {
         logger.error('spawnProcess.end', "End - " + end);
     });
     proc.on("error", error => {
-        handleError("error", error);
+        handleError("error", String(error));
     });
 
     proc.stdout.setEncoding('utf8');
