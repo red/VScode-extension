@@ -101,7 +101,7 @@ function execCommand(currentRedPath: string, command: string, fileUri?: vscode.U
     switch(command) {
         case Commands.Red_Interpret: {
             if (vscode.workspace.rootPath === undefined) {
-                buildDir = path.dirname(filePath).substring(1);
+                buildDir = path.dirname(filePath);
                 terminal.sendText(`cd "${buildDir}"`);
             }
             if (redTool) {
