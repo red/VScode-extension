@@ -98,11 +98,7 @@ function execCommand(currentRedPath: string, command: string, fileUri?: vscode.U
         filePath = `"${filePath}"`;
     }
     terminal = terminal ? terminal : vscode.window.createTerminal(`Red`);
-    buildDir = redSettings.buildDir ||
-        vscode.workspace.rootPath ||
-        path.dirname(filePath);                           // no workspace, use script folder
-    terminal.sendText(`cd "${buildDir}"`);
-
+    
     switch(command) {
         case Commands.Red_Interpret: {
             if (redTool) {
@@ -112,6 +108,10 @@ function execCommand(currentRedPath: string, command: string, fileUri?: vscode.U
             }
         } break;
         case Commands.Red_Compile: {
+            buildDir = redSettings.buildDir ||
+                vscode.workspace.rootPath ||
+                path.dirname(filePath);                           // no workspace, use script folder
+            terminal.sendText(`cd "${buildDir}"`);
             if (guiMode) {
                 text = `${currentRedPath} -t Windows -c ${filePath}`;
             } else {
