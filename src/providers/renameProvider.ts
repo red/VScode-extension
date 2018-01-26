@@ -32,7 +32,7 @@ export class RedRenameProvider implements vscode.RenameProvider {
         this.redProxyHandler = new proxy.RedProxyHandler(context, null, parseData);
     }
 
-    public provideRenameEdits(document: vscode.TextDocument, position: vscode.Position, newName: string, token: vscode.CancellationToken): Thenable<vscode.WorkspaceEdit> {
+    public async provideRenameEdits(document: vscode.TextDocument, position: vscode.Position, newName: string, token: vscode.CancellationToken): Promise<vscode.WorkspaceEdit> {
         return vscode.workspace.saveAll(false).then(() => {
             return this.doRename(document, position, newName, token);
         });

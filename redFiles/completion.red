@@ -24,7 +24,7 @@ serialize-completions: function [completions id][
 			word [
 				w: to word! name
 				if any-function? get/any w [
-					desp: next fetch-help w				;-- skip the first new-line
+					desp: fetch-help :w
 				]
 				sym-type: "builtin"
 			]

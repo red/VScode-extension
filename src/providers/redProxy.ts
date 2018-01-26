@@ -124,7 +124,7 @@ function killProcess() {
     catch (ex) { }
 }
 
-function handleError(source: string, errorMessage: string) {
+function handleError(source: string, errorMessage: string | Error) {
     logger.error(source + ' redProxy', `Error (${source}) ${errorMessage}`);
 }
 
@@ -283,7 +283,7 @@ function spawnProcess(dir: string) {
 }
 
 function sendCommand<T extends ICommandResult>(cmd: ICommand<T>): Promise<T> {
-    return new Promise<ICommandResult>((resolve, reject) => {
+    return new Promise<T>((resolve, reject) => {
         if (!proc) {
             return reject("Red proc not initialized");
         }
