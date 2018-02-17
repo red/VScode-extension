@@ -58,7 +58,7 @@ You can also configure the directory for output files of the compiler. The curre
 
 | Key                       | Command                    | Command id      |
 | :------------------------ | -------------------------- | --------------- |
-| <kbd>F6</kdb>             | Interpret Current Red File | red.interpret   |
+| <kbd>F6</kbd>             | Interpret Current Red File | red.interpret   |
 | <kbd>F7</kbd>             | Compile Current Red File   | red.compile     |
 | <kbd>Ctrl+K Ctrl+M</kbd>  | Show Red Command Menu      | red.commandMenu |
 
