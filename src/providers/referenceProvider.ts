@@ -25,7 +25,7 @@ export class RedReferenceProvider implements vscode.ReferenceProvider {
     }
 
     public provideReferences(document: vscode.TextDocument, position: vscode.Position, context: vscode.ReferenceContext, token: vscode.CancellationToken): Thenable<vscode.Location[]> {
-        return new Promise<vscode.Definition>((resolve, reject) => {
+        return new Promise<vscode.Location[]>((resolve, reject) => {
             var filename = document.fileName;
             if (document.lineAt(position.line).text.match(/^\s*\/\//)) {
                 return resolve();
