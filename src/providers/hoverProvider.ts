@@ -2,11 +2,11 @@
 
 import * as vscode from 'vscode';
 import * as proxy from './redProxy';
+import { print } from 'util';
 
 function parseData(data: proxy.ICompletionResult) {
     if (data && data.items.length > 0) {
-        var definition = data.items[0];
-
+		var definition = data.items[0];
         var txt = definition.description || definition.text;
         return new vscode.Hover({ language: "red", value: txt });
     }
@@ -29,7 +29,6 @@ export class RedHoverProvider implements vscode.HoverProvider {
             if (position.character <= 0) {
                 return resolve();
             }
-
             var source = document.getText();
             var range = document.getWordRangeAtPosition(position);
             if (range == undefined || range.isEmpty) {
@@ -43,7 +42,6 @@ export class RedHoverProvider implements vscode.HoverProvider {
                 lineIndex: position.line,
                 source: source
             };
-
             this.redProxyHandler.sendCommand(cmd, resolve, token);
         });
     }

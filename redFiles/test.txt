@@ -1,0 +1,9 @@
+#(
+    id: 0
+    results: [#(
+        text: "probe"
+        type: "builtin"
+        description: {USAGE:^/     PROBE value^/^/DESCRIPTION: ^/     Returns a value after printing its molded form. ^/     PROBE is a function! value.^/^/ARGUMENTS:^/     value        [any-type!] ^/}
+        rightLabel: ""
+    )]
+)
