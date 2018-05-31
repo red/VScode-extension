@@ -20,7 +20,7 @@ serialize-completions: function [completions id][
 	foreach name completions [
 		desp: ""
 		sym-type: "variable"
-		switch/default type [
+		switch type [
 			word [
 				w: to word! name
 				if any-function? get/any w [
@@ -29,8 +29,6 @@ serialize-completions: function [completions id][
 				sym-type: "builtin"
 			]
 			file [name: form name]
-		][
-			desp: "No matching values were found in the global context."
 		]
 
 		append blk make map! reduce [
@@ -74,18 +72,8 @@ process: function [data][
 		"arguments" []
 		"usages"	[]
 	][													;-- lookup: completions
-		either 1 < length? blk: info/completions [
+		if 1 < length? blk: info/completions [
 			write-response serialize-completions blk script/id
-		][
-			write-response json/encode make map! reduce [
-											'id			script/id
-											'results	[#(
-															text: ""
-															type: ""
-															description: {}
-															rightLabel: ""
-														)]
-											]
 		]
 	]
 ]
