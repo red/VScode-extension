@@ -279,6 +279,7 @@ function spawnProcess(dir: string) {
                 })
             }
         });
+        if (responses[0].results[0].text === "") responses[0].results[0] = "";
     });
 }
 
