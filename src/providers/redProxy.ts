@@ -157,7 +157,7 @@ function spawnProcess(dir: string) {
         var dataStr = previousData = previousData + data + ""
         var responses: any[];
         try {
-            responses = dataStr.split("\n").filter(line=> line.length > 0).map(resp=> JSON.parse(resp));
+            responses = dataStr.split("\n").filter(line=> line.length > 0).map(resp=>  JSON.parse(resp));
             previousData = "";
         }
         catch (ex) {
@@ -172,15 +172,16 @@ function spawnProcess(dir: string) {
                 commandQueue.splice(index, 1);
                 return;
             }
-            var responseId = <number>response["id"];
 
+            var responseId = <number>response["id"];
+            
             var cmd = <IExecutionCommand<ICommandResult>>commands.get(responseId);
 
             if (typeof cmd === "object" && cmd !== null) {
                 commands.delete(responseId);
                 var index = commandQueue.indexOf(cmd.id);
                 commandQueue.splice(index, 1);
-
+                
                 //Check if this command has expired
                 if (cmd.token.isCancellationRequested) {
                     return;
@@ -268,10 +269,10 @@ function spawnProcess(dir: string) {
                     }
                 }
             }
-            
+
             //Ok, check if too many pending requets
             if (commandQueue.length > 10) {
-                var items = commandQueue.splice(0, commandQueue.length - 10);
+                var items = commandQueue.splice(0, commandQueue.length);
                 items.forEach(id=> {
                     if (commands.has(id)) {
                         commands.delete(id);
@@ -279,6 +280,7 @@ function spawnProcess(dir: string) {
                 })
             }
         });
+        if(responses[0].results[0].text==="")responses[0].results[0]="";
     });
 }
 
