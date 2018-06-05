@@ -37,7 +37,7 @@ export class RedHoverProvider implements vscode.HoverProvider {
             }
             var columnIndex = range.end.character;
             var cmd: proxy.ICommand<proxy.ICompletionResult> = {
-                command: proxy.CommandType.Completions,
+                command: proxy.CommandType.Usages,
                 fileName: filename,
                 columnIndex: columnIndex,
                 lineIndex: position.line,
