@@ -50,7 +50,7 @@ serialize-completions: function [completions id][
 
 ;-- Use the completion function which is used by the red console
 ;-- TBD replace it with a sophisticated one
-parse-script: function [source line column path][
+parse-completions: function [source line column path][
 	n: -1
 	until [
 		str: source
@@ -94,41 +94,30 @@ convert-to-int: function [a][attempt [to integer! a]]
 process: function [data][
 	script: first json/decode data
 	lookup: script/lookup
-	switch/default lookup [
-		"arguments" []
-		"usages"	[
-			info: parse-usages script/source script/line script/column script/path
-			either 1 < length? blk: info/completions [			
-				write-response serialize-completions blk script/id
-			][
-				write-response json/encode make map! reduce [
-												'id			script/id
-												'results	[#(
-																text: ""
-																type: ""
-																description: {}
-																rightLabel: ""
-															)]
-												]
-			]
-		]
-	][													;-- lookup: completions
-		info: parse-script script/source script/line script/column script/path
-		either 1 < length? blk: info/completions [			
-			write-response serialize-completions blk script/id
-		][
-			write-response json/encode make map! reduce [
-											'id			script/id
-											'results	[#(
-															text: ""
-															type: ""
-															description: {}
-															rightLabel: ""
-														)]
-											]
-		]
+	case [
+		lookup = "usages" [parse-script: :parse-usages]
+		lookup = "completions" [parse-script: :parse-completions]
+		true [exit]
+	]
+	info: parse-script script/source script/line script/column script/path
+	either 1 < length? blk: info/completions [			
+		write-response serialize-completions blk script/id
+	][
+		write-response json/encode make map! reduce [
+										'id			script/id
+										'results	[
+											#(
+												text: ""
+												type: ""
+												description: {}
+												rightLabel: ""
+											)
+										]
+									]
 	]
 ]
+
+
 
 watch: does [
 	while [true][
