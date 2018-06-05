@@ -113,6 +113,20 @@ process: function [data][
 			]
 		]
 	][													;-- lookup: completions
+		info: parse-script script/source script/line script/column script/path
+		either 1 < length? blk: info/completions [			
+			write-response serialize-completions blk script/id
+		][
+			write-response json/encode make map! reduce [
+											'id			script/id
+											'results	[#(
+															text: ""
+															type: ""
+															description: {}
+															rightLabel: ""
+														)]
+											]
+		]
 	]
 ]
 
