@@ -8,7 +8,7 @@ Red [
 
 do %json.red
 
-write-response: func [response][
+write-response: func [response][ 
 	write-stdout append response "^/"
 ]
 
@@ -50,7 +50,7 @@ serialize-completions: function [completions id][
 
 ;-- Use the completion function which is used by the red console
 ;-- TBD replace it with a sophisticated one
-parse-script: function [source line column path][
+parse-completions: function [source line column path][
 	n: -1
 	until [
 		str: source
@@ -64,31 +64,60 @@ parse-script: function [source line column path][
 	]
 ]
 
+parse-usages: function [source line column path /local cmpl compl1][
+	n: -1
+	until [
+		str: source
+		if source: find/tail source #"^/" [n: n + 1]
+		any [none? source n = line]
+	]
+	cmpl: clear ""
+	while  [all [str/:column <> #"^/" str/:column <> #" " str/:column <> none]][
+		insert cmpl str/:column 
+		column: column - 1
+	]
+	compl1: clear []  
+	if cmpl/1 <> #"^"" [
+		append compl1 cmpl
+		]
+	either cmpl/1 = #"%" [insert compl1 'file][insert compl1 'word]
+	unless none? convert-to-int cmpl [compl1: clear []]
+	reduce [
+		'completions	compl1 
+		'usages			none
+		'signatures		none
+	]
+]
+
+convert-to-int: function [a][attempt [to integer! a]]
+
 process: function [data][
 	script: first json/decode data
 	lookup: script/lookup
-
+	case [
+		lookup = "usages" [parse-script: :parse-usages]
+		lookup = "completions" [parse-script: :parse-completions]
+		true [exit]
+	]
 	info: parse-script script/source script/line script/column script/path
-
-	switch/default lookup [
-		"arguments" []
-		"usages"	[]
-	][													;-- lookup: completions
-		either 1 < length? blk: info/completions [			
-			write-response serialize-completions blk script/id
-		][
-			write-response json/encode make map! reduce [
-											'id			script/id
-											'results	[#(
-															text: ""
-															type: ""
-															description: {}
-															rightLabel: ""
-														)]
-											]
-		]
+	either 1 < length? blk: info/completions [			
+		write-response serialize-completions blk script/id
+	][
+		write-response json/encode make map! reduce [
+										'id			script/id
+										'results	[
+											#(
+												text: ""
+												type: ""
+												description: {}
+												rightLabel: ""
+											)
+										]
+									]
 	]
 ]
+
+
 
 watch: does [
 	while [true][

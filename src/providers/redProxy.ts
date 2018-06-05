@@ -246,23 +246,18 @@ function spawnProcess(dir: string) {
                         break;
                     }
                     case CommandType.Usages: {
-                        var defs = <any[]>response['results'];
-                        if (defs.length > 0) {
-                            var refResult: IReferenceResult = {
-                                requestId: cmd.id,
-                                references: defs.map(item=> {
-                                    return {
-                                        columnIndex: item.column,
-                                        fileName: item.fileName,
-                                        lineIndex: item.line - 1,
-                                        moduleName: item.moduleName,
-                                        name: item.name
-                                    };
-                                }
-                                )
-                            };
+                        var results = <IAutoCompleteItem[]>response['results'];
+                        if (results.length > 0) {
+                            results.forEach(item=> {
+                                item.type = getMappedVSCodeType(<string><any>item.type);
+                                item.kind = getMappedVSCodeSymbol(<string><any>item.type);
+                            });
 
-                            cmd.resolve(refResult);
+                            var completionResult: ICompletionResult = {
+                                items: results,
+                                requestId: cmd.id
+                            }
+                            cmd.resolve(completionResult);
                         }
                         break;
                     }
