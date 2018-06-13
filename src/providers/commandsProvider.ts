@@ -69,8 +69,13 @@ function execInTerminalGUI(fileUri?: vscode.Uri) {
 function execCommand(currentRedPath: string, command: string, fileUri?: vscode.Uri, guiMode?: boolean, redTool?: boolean) {
     let redSettings = settings.RedSettings.getInstance();
     let filePath: string;
-    let buildDir: string;
     let text: string;
+
+    let redPath = path.parse(currentRedPath).dir;
+    let redExecutable = path.parse(currentRedPath).base;
+
+    terminal = terminal ? terminal : vscode.window.createTerminal(`Red`);
+    terminal.sendText(`cd "${redPath}"`);
 
     if (fileUri === undefined || typeof fileUri.fsPath !== 'string') {
         const activeEditor = vscode.window.activeTextEditor;
@@ -94,25 +99,21 @@ function execCommand(currentRedPath: string, command: string, fileUri?: vscode.U
         filePath = fileUri.fsPath;
     }
 
-    terminal = terminal ? terminal : vscode.window.createTerminal(`Red`);
+    let outputFilename = path.join(path.parse(filePath).dir, path.parse(filePath).name);
     
     switch(command) {
         case Commands.Red_Interpret: {
             if (redTool) {
-                text = `${currentRedPath} --cli "${filePath}"`;
+                text = `${redExecutable} --cli "${filePath}"`;
             } else {
-                text = `${currentRedPath} "${filePath}"`;
+                text = `${redExecutable} "${filePath}"`;
             }
         } break;
         case Commands.Red_Compile: {
-            buildDir = redSettings.buildDir ||
-                vscode.workspace.rootPath ||
-                path.dirname(filePath);                           // no workspace, use script folder
-            terminal.sendText(`cd "${buildDir}"`);
             if (guiMode) {
-                text = `${currentRedPath} -t Windows -c "${filePath}"`;
+                text = `${redExecutable} -t Windows -o "${outputFilename}" -c "${filePath}"`;
             } else {
-                text = `${currentRedPath} -c "${filePath}"`;
+                text = `${redExecutable} -o "${outputFilename}" -c "${filePath}"`;
             }
         } break;
         default: {
