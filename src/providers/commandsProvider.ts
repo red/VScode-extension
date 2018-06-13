@@ -7,10 +7,10 @@ let terminal: vscode.Terminal;
 
 export function activateExecInTerminalProvider(): vscode.Disposable[] {
     const disposables: vscode.Disposable[] = [];
-    disposables.push(vscode.commands.registerCommand(Commands.Red_Interpret, execInTerminal));
-    disposables.push(vscode.commands.registerCommand(Commands.Red_InterpretInGUIConsole, execInTerminalGUI));
-    disposables.push(vscode.commands.registerCommand(Commands.Red_Compile, compileInTerminal));
-    disposables.push(vscode.commands.registerCommand(Commands.Red_CompileGUI, compileInTerminalGUI));
+    disposables.push(vscode.commands.registerCommand(Commands.Red_Interpret, () => execInTerminal()));
+    disposables.push(vscode.commands.registerCommand(Commands.Red_InterpretInGUIConsole, () => execInTerminalGUI()));
+    disposables.push(vscode.commands.registerCommand(Commands.Red_Compile, () => compileInTerminal()));
+    disposables.push(vscode.commands.registerCommand(Commands.Red_CompileGUI, () => compileInTerminalGUI()));
     //disposables.push(vscode.commands.registerCommand(Commands.Red_Exec_Selection, execSelectionInTerminal));
     disposables.push(vscode.window.onDidCloseTerminal((closedTerminal: vscode.Terminal) => {
         if (terminal === closedTerminal) {
