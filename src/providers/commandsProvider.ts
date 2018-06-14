@@ -70,6 +70,8 @@ function execCommand(currentRedPath: string, command: string, fileUri?: vscode.U
     let redSettings = settings.RedSettings.getInstance();
     let filePath: string;
     let text: string;
+    let buildDir: string;
+    let outputFilename: string;
 
     let redPath = path.parse(currentRedPath).dir;
     let redExecutable = path.parse(currentRedPath).base;
@@ -99,7 +101,6 @@ function execCommand(currentRedPath: string, command: string, fileUri?: vscode.U
         filePath = fileUri.fsPath;
     }
 
-    let outputFilename = path.join(path.parse(filePath).dir, path.parse(filePath).name);
     
     switch(command) {
         case Commands.Red_Interpret: {
@@ -110,6 +111,10 @@ function execCommand(currentRedPath: string, command: string, fileUri?: vscode.U
             }
         } break;
         case Commands.Red_Compile: {
+            buildDir = redSettings.buildDir ||
+                vscode.workspace.rootPath ||
+                path.dirname(filePath);
+            outputFilename = path.join(buildDir, path.parse(filePath).name);
             if (guiMode) {
                 text = `${redExecutable} -t Windows -o "${outputFilename}" -c "${filePath}"`;
             } else {
