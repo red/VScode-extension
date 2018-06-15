@@ -7,10 +7,10 @@ let terminal: vscode.Terminal;
 
 export function activateExecInTerminalProvider(): vscode.Disposable[] {
     const disposables: vscode.Disposable[] = [];
-    disposables.push(vscode.commands.registerCommand(Commands.Red_Interpret, execInTerminal));
-    disposables.push(vscode.commands.registerCommand(Commands.Red_InterpretInGUIConsole, execInTerminalGUI));
-    disposables.push(vscode.commands.registerCommand(Commands.Red_Compile, compileInTerminal));
-    disposables.push(vscode.commands.registerCommand(Commands.Red_CompileGUI, compileInTerminalGUI));
+    disposables.push(vscode.commands.registerCommand(Commands.Red_Interpret, () => execInTerminal()));
+    disposables.push(vscode.commands.registerCommand(Commands.Red_InterpretInGUIConsole, () => execInTerminalGUI()));
+    disposables.push(vscode.commands.registerCommand(Commands.Red_Compile, () => compileInTerminal()));
+    disposables.push(vscode.commands.registerCommand(Commands.Red_CompileGUI, () => compileInTerminalGUI()));
     //disposables.push(vscode.commands.registerCommand(Commands.Red_Exec_Selection, execSelectionInTerminal));
     disposables.push(vscode.window.onDidCloseTerminal((closedTerminal: vscode.Terminal) => {
         if (terminal === closedTerminal) {
@@ -69,8 +69,15 @@ function execInTerminalGUI(fileUri?: vscode.Uri) {
 function execCommand(currentRedPath: string, command: string, fileUri?: vscode.Uri, guiMode?: boolean, redTool?: boolean) {
     let redSettings = settings.RedSettings.getInstance();
     let filePath: string;
-    let buildDir: string;
     let text: string;
+    let buildDir: string;
+    let outputFilename: string;
+
+    let redPath = path.parse(currentRedPath).dir;
+    let redExecutable = path.parse(currentRedPath).base;
+
+    terminal = terminal ? terminal : vscode.window.createTerminal(`Red`);
+    terminal.sendText(`cd "${redPath}"`);
 
     if (fileUri === undefined || typeof fileUri.fsPath !== 'string') {
         const activeEditor = vscode.window.activeTextEditor;
@@ -94,25 +101,24 @@ function execCommand(currentRedPath: string, command: string, fileUri?: vscode.U
         filePath = fileUri.fsPath;
     }
 
-    terminal = terminal ? terminal : vscode.window.createTerminal(`Red`);
     
     switch(command) {
         case Commands.Red_Interpret: {
             if (redTool) {
-                text = `${currentRedPath} --cli "${filePath}"`;
+                text = `${redExecutable} --cli "${filePath}"`;
             } else {
-                text = `${currentRedPath} "${filePath}"`;
+                text = `${redExecutable} "${filePath}"`;
             }
         } break;
         case Commands.Red_Compile: {
             buildDir = redSettings.buildDir ||
                 vscode.workspace.rootPath ||
-                path.dirname(filePath);                           // no workspace, use script folder
-            terminal.sendText(`cd "${buildDir}"`);
+                path.dirname(filePath);
+            outputFilename = path.join(buildDir, path.parse(filePath).name);
             if (guiMode) {
-                text = `${currentRedPath} -t Windows -c "${filePath}"`;
+                text = `${redExecutable} -t Windows -o "${outputFilename}" -c "${filePath}"`;
             } else {
-                text = `${currentRedPath} -c "${filePath}"`;
+                text = `${redExecutable} -o "${outputFilename}" -c "${filePath}"`;
             }
         } break;
         default: {
