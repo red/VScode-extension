@@ -79,7 +79,7 @@ function execCommand(currentRedPath: string, command: string, fileUri?: vscode.U
     terminal = terminal ? terminal : vscode.window.createTerminal(`Red`);
     terminal.sendText(`cd "${redPath}"`);
 
-    if (fileUri === undefined || typeof fileUri.fsPath !== 'string') {
+    if (fileUri === null || fileUri === undefined || typeof fileUri.fsPath !== 'string') {
         const activeEditor = vscode.window.activeTextEditor;
         if (activeEditor !== undefined) {
             if (!activeEditor.document.isUntitled) {
