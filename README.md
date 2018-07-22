@@ -54,6 +54,8 @@ You can also configure the directory for output files of the compiler. The curre
   "red.buildDir": "${workspaceRoot}/build/debug"
   ```
 
+If you are using Linux and prefer to use the Windows version of Red through Wine until GUI support is available for Linux, you can point `red.redPath` to a small [shell script](https://github.com/red/red/wiki/Visual-Studio-Code-Plugin#running-red-through-wine-on-linux).
+
 ## Shortcuts
 
 | Key                       | Command                    | Command id      |
