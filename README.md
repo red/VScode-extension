@@ -5,7 +5,7 @@ An extension with rich support for the [Red language](https://www.red-lang.org/)
 * hint all syntax errors
 * auto completion
 * goto definition
-* hover
+* hover to view signatures
 * Interpret or compile Red source file
 
 ## Quick Start
@@ -13,7 +13,7 @@ An extension with rich support for the [Red language](https://www.red-lang.org/)
 * Install the extension
 * Install [Red](http://www.red-lang.org/p/download.html) (Note: For Windows user, need to run ```red.exe --cli```)
 
-  You're ready to use it.
+  > latest daily version should be installed for now
 
 * Turn off the Auto Completion
 
@@ -31,6 +31,8 @@ For compiling Red source file, you need to configure the path to the Red toolcha
 
   ```
   "red.redPath": "/home/user1/tools/red-latest"
+  or
+  "red.redPath": "d:/path-to-red/red.exe"
   ```
 
 

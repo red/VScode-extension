@@ -8,7 +8,7 @@
 * hint all syntax errors
 * auto completion
 * goto definition
-* hover
+* hover to view signatures
 
 ## 0.2.2
 
