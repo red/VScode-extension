@@ -2,15 +2,16 @@
 
 An extension with rich support for the [Red language](https://www.red-lang.org/), with features including the following and more:
 
-* Intellisense (autocompletion)
-* Signature Help
+* hint all syntax errors
+* auto completion
+* goto definition
+* hover
 * Interpret or compile Red source file
-* Snippets
 
 ## Quick Start
 
 * Install the extension
-* If [Red](http://www.red-lang.org/p/download.html) is aleady installed (Note: For Windows user, need to run ```red.exe --cli``` first)
+* Install [Red](http://www.red-lang.org/p/download.html) (Note: For Windows user, need to run ```red.exe --cli```)
 
   You're ready to use it.
 
@@ -32,11 +33,6 @@ For compiling Red source file, you need to configure the path to the Red toolcha
   "red.redPath": "/home/user1/tools/red-latest"
   ```
 
-* Relative to `${workspaceRoot}`, where `${workspaceRoot}` resolves to the current work space (project) directory.
-
-  ```
-  "red.redPath": "${workspaceRoot}/toolchain/red"
-  ```
 
 You can also configure the directory for output files of the compiler. The current work space (project) directory is used by default.
 
@@ -48,11 +44,6 @@ You can also configure the directory for output files of the compiler. The curre
   "red.buildDir": "/home/user1/debug"
   ```
 
-* Relative to `${workspaceRoot}`
-
-  ```
-  "red.buildDir": "${workspaceRoot}/build/debug"
-  ```
 
 If you are using Linux and prefer to use the Windows version of Red through Wine until GUI support is available for Linux, you can point `red.redPath` to a small [shell script](https://github.com/red/red/wiki/Visual-Studio-Code-Plugin#running-red-through-wine-on-linux).
 
@@ -100,6 +91,10 @@ The following commands are available for the Red extension. These can be associa
   + Details on contributing can be found [here](https://github.com/red/VScode-extension/wiki/Contribution) 
 * Any and all feedback is appreciated and welcome.
   * Please feel free to [add suggestions here](https://github.com/red/VScode-extension/issues)
+
+![Image of Completions](https://raw.githubusercontent.com/red/VScode-extension/master/images/completion.gif)
+
+![Image of Goto Definition](https://raw.githubusercontent.com/red/VScode-extension/master/images/goto-definition.gif)
 
 ![Image of General Features](https://raw.githubusercontent.com/red/VScode-extension/master/images/general.gif)
 

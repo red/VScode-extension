@@ -445,29 +445,13 @@
 			"match": "(?<=^\\[|^)(Red|Red(/System)?)(?=\\s*\\[)",
 			"name": "keyword.control.header.red"
 		},
-		"word-infix": {
-			"match": "(?<=^|[\\s\\[\\]()}\"])(\\+\\+?|--?|\\*\\*?|//?|=|>=?|<(=|>)?)(?=[\\s\\[\\](){\"])",
-			"name": "keyword.operator.arithmetic.red"
-		},
 		"word-lit": {
 			"match": "(?<=^|[\\s\\[\\]()}\"/])'[A-Za-z=\\-\\?\\!\\_\\*\\+\\.`~\\&][A-Za-z0-9=\\-\\!\\?\\_\\*\\+\\.`~\\&]*(/([A-Za-z=\\-\\?\\!\\_\\*\\+\\.`~][A-Za-z0-9=\\-\\!\\?\\_\\*\\+\\.`~]*|\\d+))*",
 			"name": "constant.other.litword.red"
 		},
-		"word-logic": {
-			"match": "(?<=^|[\\s\\[\\]()}\"])(true|yes|false|off|none|no)(?=[\\s\\[\\](){\"])",
-			"name": "constant.other.logic.red"
-		},
 		"word-native": {
-			"match": "(?<=^|[\\s\\[\\]()}\"])(about|abs|absolute|action\\?|add|alert|alias|all|alter|and~|and|any|any-block\\?|any-function\\?|any-string\\?|any-type\\?|any-word\\?|append|arccosine|arcsine|arctangent|array|as|ask|at|back|binary\\?|bind|bitset\\?|block\\?|body-of|boot-prefs|browse|build-tag|call|caret-to-offset|center-face|change|change-dir|char\\?|charset|checksum|choose|clean-path|clear|clear-fields|close|closure|collect|comment|complement|compose|compress|confine|confirm|connected\\?|context|continue-post|copy|cosine|cp|crypt-strength\\?|cvs-date|cvs-version|datatype\\?|date\\?|debase|declare|decimal\\?|decode-cgi|decode-url|decompress|deflag-face|dehex|delete|demo|desktop|detab|dh-compute-key|dh-generate-key|dh-make-key|difference|dir\\?|dirize|disarm|dispatch|divide|do|do-boot|do-events|do-face|do-face-alt|does|dsa-generate-key|dsa-make-key|dsa-make-signature|dsa-verify-signature|dump-face|dump-pane|echo|editor|email\\?|emailer|empty\\?|enbase|entab|equal\\?|error\\?|even\\?|event\\?|exclude|exists-thru\\?|exists\\?|exit|exp|extract|fifth|file\\?|find|find-key-face|find-window|first|flag-face|flag-face\\?|flash|focus|for|forall|foreach|forever|form|forskip|found\\?|fourth|free|func|function\\??|get|get-env|get-modes|get-net-info|get-style|get-word\\?|greater-or-equal\\?|greater\\?|halt|has|hash\\?|head\\??|help|hide|hide-popup|image\\?|import-email|in|in-window\\?|index\\?|info\\?|inform|input|input\\?|insert|insert-event-func|inside\\?|integer\\?|intersect|issue\\?|join|keep|last|launch|launch-thru|layout|length\\?|lesser-or-equal\\?|lesser\\?|library\\?|link-app\\?|link\\?|list-dir|list\\?|lit-path\\?|lit-word\\?|load|load-image|load-prefs|load-thru|log-10|log-2|log-e|logic\\?|lowercase|make|make-dir|make-face|max|maximum|maximum-of|min|minimum|minimum-of|modified\\?|mold|money\\?|multiply|native\\?|negate|negative\\?|net-error|next|none\\?|not|not-equal\\?|now|number\\?|object\\?|odd\\?|offset-to-caret|offset\\?|op\\?|open|open-events|or|or~|outside\\?|pair\\?|paren\\?|parse|parse-email-addrs|parse-header|parse-header-date|parse-xml|path-thru|path\\?|pick|poke|port\\?|positive\\?|power|prin|print|probe|protect|protect-system|q|query|quit|random|read|read-io|read-net|read-thru|reboot|recycle|reduce|refinement\\?|reform|rejoin|remainder|remold|remove|remove-event-func|rename|repeat|repend|replace|request|request-color|request-date|request-download|request-file|request-list|request-pass|request-text|resend|return:|reverse|routine\\??|rsa-encrypt|rsa-generate-key|rsa-make-key|same\\?|save|save-prefs|save-user|screen-offset\\?|script\\?|scroll-para|second|secure|select|send|series\\?|set|set-env|set-font|set-modes|set-net|set-para|set-path\\?|set-style|set-user|set-user-name|set-word\\?|show|show-popup|sine|size-text|size\\?|skip|sort|source|span\\?|spec-of|split-path|square-root|strict-equal\\?|strict-not-equal\\?|string\\?|struct\\?|stylize|subtract|tag\\?|tail\\??|tangent|textinfo|third|throw-on-error|time\\?|title-of|to|to-local-file|to-red-file|trace|trim|tuple\\?|types-of|type\\?|unfocus|uninstall|union|unique|unprotect|unset|unset\\?|unview|update|upgrade|uppercase|url\\?|usage|use|values-of|value\\?|vbug|view|view-install|view-prefs|view\\?|viewed\\?|wait|what|what-dir|win-offset\\?|within\\?|words-of|word\\?|write|write-io|write-user|xor|xor~|zero\\?|/local|thru|end)(/(?=[A-Za-z=\\-\\?\\!\\_\\*\\+\\.`~\\&])|(?=[\\s\\[\\](){\"]|$))",
+			"match": "(?<=^|[\\s\\[\\]()}\"])(datatype!|unset!|none!|logic!|block!|paren!|string!|file!|url!|char!|integer!|float!|word!|set-word!|lit-word!|get-word!|refinement!|issue!|native!|action!|op!|function!|path!|lit-path!|set-path!|get-path!|routine!|bitset!|point!|object!|typeset!|error!|vector!|hash!|pair!|percent!|tuple!|map!|binary!|series!|time!|tag!|email!|handle!|date!|image!|to|not|remove|while|collect|any|copy|insert|if|quote|set|case|change|clear|move|poke|put|random|reverse|sort|swap|take|trim|uppercase|lowercase|checksum|add|subtract|divide|on-parse-event|try|catch|multiply|browse|throw|math|event!|make|any-type!|return|reflect|form|mold|all|modify|absolute|number!|negate|power|remainder|round|even\\?|odd\\?|and~|complement|or~|xor~|append|at|back|any-object!|find|skip|last|tail|head|head\\?|index\\?|any-word!|length\\?|next|pick|scalar!|any-string!|select|any-function!|tail\\?|delete|query|read|source|as|write|unless|either|until|loop|repeat|forever|foreach|forall|remove-each|func|function|does|has|switch|do|expand|reduce|any-block!|compose|get|print|prin|equal\\?|not-equal\\?|strict-equal\\?|lesser\\?|greater\\?|lesser-or-equal\\?|greater-or-equal\\?|same\\?|type\\?|stats|show|bind|context|in|object|parse|input|union|unique|intersect|difference|exclude|complement\\?|dehex|negative\\?|positive\\?|max|min|shift|to-hex|sine|cosine|tangent|arcsine|arccosine|arctangent|arctangent2|NaN\\?|zero\\?|log-2|log-10|log-e|exp|square-root|construct|value\\?|as-pair|break|continue|exit|extend|debase|enbase|to-local-file|wait|unset|new-line|any-list!|new-line\\?|context\\?|set-env|get-env|list-env|now|sign\\?|any-path!|call|size\\?|decompress|recycle|on|off|quit|\\+|no|last-lf\\?|get-current-dir|dir|set-current-dir|make-dir|<|true|<>|%|<<|or|null|cause-error|view|unview|error\\?|quit-return|=|none|immediate!|all-word!|none\\?|any-block\\?|system|any-list\\?|word\\?|char\\?|tag\\?|any-string\\?|block\\?|series\\?|binary\\?|\\*|/|attempt|p-indent|newline|url\\?|string\\?|suffix\\?|file\\?|object\\?|body-of|yes|first|second|third|-|>|mod|<=|slash|clean-path|dir\\?|exists\\?|normalize-dir|empty\\?|dirize|create-dir|dbl-quote|to-red-file|space|offset\\?|what-dir|expand-directives|load|Red|split-path|change-dir|path-thru|save|load-thru|sum|to-local-date|false|float\\?|>=|charset|\\?|lf|tab|set-quiet|repend|set-word\\?|q|stop-reactor|words-of|replace|react|function\\?|spec-of|unset\\?|rebol|halt|op\\?|any-function\\?|to-paren|routine|as-color|as-rgba|\\*\\*|class-of|face!|rich-text|size-text|hex-to-rgb|tuple\\?|make-face|gui-console-ctx|debug-info\\?|find-flag\\?|draw|handle\\?|link-tabs-to-parent|link-sub-to-parent|on-face-deep-change\\*|update-font-faces|do-actor|do-safe|event\\?|do-events|white|font-fixed|font-sans-serif|font-serif|transparent|pair\\?|font!|foreach-face|cancel-captions|CR|pad|issue\\?|para!|alter|path\\?|typeset\\?|datatype\\?|set-flag|layout|extract|image\\?|rtd-layout|get-word\\?|to-logic|to-set-word|//|to-block|center-face|dump-face|scroller!|request-font|request-file|request-dir|rejoin|dot|ellipsize-at|any-object\\?|map\\?|keys-of|a-an|also|help-string|what|routine\\?|os-info|to-UTC-date|escape|ask|list-dir|probe|action\\?|native\\?|refinement\\?|to-word|comma|get-scroller|caret-to-offset|offset-to-caret|write-clipboard|read-clipboard|integer\\?|red-complete-ctx|highlight|to-string|fstk-logo|gray|shift-right|shift-left|shift-logical|as-ipv4|write-stdout|sp|crlf|pi|internal!|external!|default!|aqua|beige|black|blue|brick|brown|coal|coffee|crimson|cyan|forest|gold|green|ivory|khaki|leaf|linen|magenta|maroon|mint|navy|oldrab|olive|orange|papaya|pewter|pink|purple|reblue|rebolor|sienna|silver|sky|snow|tanned|teal|violet|water|wheat|yello|yellow|glass|alert|comment|\\?\\?|fourth|fifth|values-of|bitset\\?|email\\?|get-path\\?|hash\\?|lit-path\\?|lit-word\\?|logic\\?|paren\\?|percent\\?|set-path\\?|time\\?|date\\?|vector\\?|any-path\\?|any-word\\?|number\\?|immediate\\?|scalar\\?|all-word\\?|to-bitset|to-binary|to-char|to-email|to-file|to-float|to-get-path|to-get-word|to-hash|to-integer|to-issue|to-lit-path|to-lit-word|to-map|to-none|to-pair|to-path|to-percent|to-refinement|to-set-path|to-tag|to-time|to-typeset|to-tuple|to-unset|to-url|to-image|to-date|parse-trace|modulo|eval-set-path|extract-boot-args|flip-exe-flag|split|do-file|exists-thru\\?|read-thru|do-thru|cos|sin|tan|acos|asin|atan|atan2|sqrt|average|==|=\\?|>>|>>>|and|xor|reactor!|deep-reactor!|clear-reactions|dump-reactions|is|react\\?|preprocessor|within\\?|overlap\\?|distance\\?|face\\?|offset-to-char|metrics\\?|insert-event-func|remove-event-func|set-focus|help-ctx|help|fetch-help|about|ls|ll|pwd|cd|red-complete-input|tips!)(/(?=[A-Za-z=\\-\\?\\!\\_\\*\\+\\.`~\\&])|(?=[\\s\\[\\](){\"]|$))",
 			"name": "storage.type.function.red"
-		},
-		"word-native-to-type": {
-			"match": "(?<=^|[\\s\\[\\]()}\"])(to-binary|to-bitset|to-block|to-char|to-date|to-decimal|to-email|to-event|to-file|to-get-word|to-hash|to-hex|to-idate|to-image|to-integer|to-issue|to-list|to-lit-path|to-lit-word|to-logic|to-money|to-none|to-pair|to-paren|to-path|to-refinement|to-set-path|to-set-word|to-string|to-tag|to-time|to-tuple|to-url|to-word)(?=[\\s\\[\\](){\"]|$)",
-			"name": "constant.other.word.to-type.red"
-		},
-		"word-control-flow": {
-			"match": "(?<=^|[\\s\\[\\]()}\"])(break|continue|return|case|switch|default|if|unless|either|while|loop|until|catch|throw|try)(?=[\\s\\[\\](){\"]|$)",
-			"name": "keyword.control.native.red"
 		},
 		"word-parse": {
 			"match": "(?<=^|[\\s\\[\\]()}\"])(thru|some|opt|end)(?=[\\s\\[\\](){\"]|$)",
@@ -503,22 +487,10 @@
 					"include": "#word-native"
 				},
 				{
-					"include": "#word-native-to-type"
-				},
-				{
-					"include": "#word-infix"
-				},
-				{
-					"include": "#word-logic"
-				},
-				{
 					"include": "#word-refine"
 				},
 				{
 					"include": "#word-qm"
-				},
-				{
-					"include": "#word-control-flow"
 				},
 				{
 					"include": "#word"

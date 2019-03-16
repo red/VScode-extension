@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.3.0
+
+### new features
+
+* support [lsp](https://langserver.org/)
+* hint all syntax errors
+* auto completion
+* goto definition
+* hover
+
 ## 0.2.2
 
 ### Bug fixes
