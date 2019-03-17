@@ -2,7 +2,7 @@
     "name": "red",
     "displayName": "Red",
     "description": "Syntax Coloring, Intellisense, Snippets and more",
-    "version": "0.3.0",
+    "version": "0.3.1",
     "publisher": "red-auto",
     "license": "BSL-1.0",
     "homepage": "https://github.com/red/VScode-extension/blob/master/README.md",
@@ -54,7 +54,8 @@
                 ],
                 "extensions": [
                     ".reds"
-                ]
+                ],
+                "configuration": "./reds.configuration.json"
             }
         ],
         "grammars": [
@@ -62,6 +63,11 @@
                 "language": "red",
                 "scopeName": "source.red",
                 "path": "./syntaxes/Red.tmLanguage.json"
+            },
+            {
+                "language": "reds",
+                "scopeName": "source.reds",
+                "path": "./syntaxes/Reds.tmLanguage.json"
             }
         ],
         "commands": [

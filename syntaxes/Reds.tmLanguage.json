@@ -1,9 +1,9 @@
 {
-	"name": "Red",
-	"scopeName": "source.red",
+	"name": "Reds",
+	"scopeName": "source.reds",
 	"uuid": "6BE0E13B-C4DD-478F-953A-2D84DBBCA2BA",
 	"fileTypes": [
-		"red"
+		"reds"
 	],
 	"patterns": [
 		{
