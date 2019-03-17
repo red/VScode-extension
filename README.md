@@ -13,7 +13,7 @@ An extension with rich support for the [Red language](https://www.red-lang.org/)
 * Install the extension
 * Install [Red](http://www.red-lang.org/p/download.html) (Note: For Windows user, need to run ```red.exe --cli```)
 
-  > latest daily version should be installed for now
+  **Note**: latest daily version should be installed for `0.3.x`
 
 * Turn off the Auto Completion
 
@@ -25,22 +25,22 @@ An extension with rich support for the [Red language](https://www.red-lang.org/)
 
 ## Compile Red Source File
 
-For compiling Red source file, you need to configure the path to the Red toolchain in the **User or Workspace Settings file (settings.json)** as follows.
+### Specify the full path of the red toolchain
 
-* Specify the full path of the red toolchain
+For compiling Red source file, you need to configure the path to the Red toolchain in the **User or Workspace Settings file (settings.json)** as follows.
 
   ```
   "red.redPath": "/home/user1/tools/red-latest"
-  or
-  "red.redPath": "d:/path-to-red/red.exe"
   ```
 
+For Windows user: `c:/work/red/red.exe` or `c:\\work\\red\\red.exe` or `c:\work\red\red.exe` will all be accepted.
+
+### Specify the full path
 
 You can also configure the directory for output files of the compiler. The current work space (project) directory is used by default.
 
 (**Note**: If no work space directory, the output files are in the same folder as the Red source file.)
 
-* Specify the full path
 
   ```
   "red.buildDir": "/home/user1/debug"
