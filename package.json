@@ -55,7 +55,7 @@
                 "extensions": [
                     ".reds"
                 ],
-                "configuration": "./reds.configuration.json"
+                "configuration": "./red.configuration.json"
             }
         ],
         "grammars": [
