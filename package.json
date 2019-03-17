@@ -66,8 +66,8 @@
             },
             {
                 "language": "reds",
-                "scopeName": "source.reds",
-                "path": "./syntaxes/Reds.tmLanguage.json"
+                "scopeName": "source.red",
+                "path": "./syntaxes/Red.tmLanguage.json"
             }
         ],
         "commands": [

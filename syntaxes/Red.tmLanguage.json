@@ -3,7 +3,8 @@
 	"scopeName": "source.red",
 	"uuid": "6BE0E13B-C4DD-478F-953A-2D84DBBCA2BA",
 	"fileTypes": [
-		"red"
+		"red",
+		"reds"
 	],
 	"patterns": [
 		{
