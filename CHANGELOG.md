@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.1
+
+add `Red/System` syntax highlight
+
 ## 0.3.0
 
 ### new features
