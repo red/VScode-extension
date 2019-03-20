@@ -1,10 +1,11 @@
-# Red
+# VSCode extension for [Red](https://www.red-lang.org/)
 
 An extension with rich support for the [Red language](https://www.red-lang.org/), with features including the following and more:
 
 * hint all syntax errors
 * auto completion
 * goto definition
+* navigate to any symbol definition
 * hover to view signatures
 * Interpret or compile Red source file
 
@@ -87,20 +88,42 @@ The following commands are available for the Red extension. These can be associa
 ]
 ```
 
+## Feature Screenshots
+
+* diagnostics
+
+![Image of Completions](https://raw.githubusercontent.com/red/VScode-extension/master/images/diagnostics.gif)
+
+* auto completion
+
+![Image of Completions](https://raw.githubusercontent.com/red/VScode-extension/master/images/completion.gif)
+
+* goto definition
+
+![Image of Goto Definition](https://raw.githubusercontent.com/red/VScode-extension/master/images/goto-definition.gif)
+
+* navigate to any symbol definition
+
+![Image of Goto Definition](https://raw.githubusercontent.com/red/VScode-extension/master/images/goto-symbols.gif)
+
+* hover to view signatures
+
+![Image of Goto Definition](https://raw.githubusercontent.com/red/VScode-extension/master/images/hover.gif)
+
+* Interpret or compile Red source file
+
+![Image of Red Command Menu](https://raw.githubusercontent.com/red/VScode-extension/master/images/redmenu.gif)
+
+* old Screenshots
+
+![Image of General Features](https://raw.githubusercontent.com/red/VScode-extension/master/images/general.gif)
+
 ## [Issues, Feature Requests and Contributions](https://github.com/red/VScode-extension/issues)
 
 * Contributions are always welcome. Fork it, modify it and create a pull request.
   + Details on contributing can be found [here](https://github.com/red/VScode-extension/wiki/Contribution) 
 * Any and all feedback is appreciated and welcome.
   * Please feel free to [add suggestions here](https://github.com/red/VScode-extension/issues)
-
-![Image of Completions](https://raw.githubusercontent.com/red/VScode-extension/master/images/completion.gif)
-
-![Image of Goto Definition](https://raw.githubusercontent.com/red/VScode-extension/master/images/goto-definition.gif)
-
-![Image of General Features](https://raw.githubusercontent.com/red/VScode-extension/master/images/general.gif)
-
-![Image of Red Command Menu](https://raw.githubusercontent.com/red/VScode-extension/master/images/redmenu.gif)
 
 ## Source
 

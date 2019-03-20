@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.3.2
+
+### new features
+
+* navigate to any symbol definition
+* more precise to hover or goto definition
+* add Red's word pattern
+
 ## 0.3.1
 
 add `Red/System` syntax highlight
