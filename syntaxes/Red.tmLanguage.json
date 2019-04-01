@@ -395,6 +395,10 @@
 			"match": "(?<![\\w.,])([-+]?((\\d+[\\d']*[.,]?[\\d']*)|([.,]\\d+[\\d']*))((e|E)(\\+|-)?\\d+)?)(?=\\W)",
 			"name": "constant.numeric.red"
 		},
+		"value-hex": {
+			"match": "(?<!\\w)[0-9a-fA-F]+[0-9a-fA-F]*h",
+			"name": "constant.numeric.hex.red"
+		},
 		"value-pair": {
 			"match": "(?<!\\w)[-+]?[[:digit:]]+[x][-+]?[[:digit:]]+",
 			"name": "constant.numeric.pair.red"
@@ -420,6 +424,9 @@
 				},
 				{
 					"include": "#value-number"
+				},
+				{
+					"include": "#value-hex"
 				},
 				{
 					"include": "#value-pair"
