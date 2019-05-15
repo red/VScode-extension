@@ -18,7 +18,7 @@ function folderExists(path: fs.PathLike)
 
 function getRedConsole(gui: boolean) {
 	let preBuiltPath: string;
-	if (process.platform == 'win32') {
+	if (process.platform === 'win32') {
 		preBuiltPath = path.join(process.env.ALLUSERSPROFILE || "c:", 'Red');
 	} else {
 		preBuiltPath = path.join(process.env.HOME || "/tmp", '.red');
@@ -30,12 +30,12 @@ function getRedConsole(gui: boolean) {
 		let files = fs.readdirSync(preBuiltPath);
 		let _console = '';
 		let startsWith = 'console-';
-		if (gui) {startsWith = 'gui-console-'}
+		if (gui) {startsWith = 'gui-console-';}
 		for (let i in files) {
 			let name = files[i];
 			let ext = path.extname(name);
-			if (name.startsWith(startsWith) && (ext == '.exe' || ext == '')) {
-				if (_console == '') {
+			if (name.startsWith(startsWith) && (ext === '.exe' || ext === '')) {
+				if (_console === '') {
 					_console = name;
 				} else {
 					let stamps1 = path.basename(_console, ext).split("-");

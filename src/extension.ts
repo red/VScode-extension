@@ -2,8 +2,8 @@
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
-import {RedConfiguration} from  './RedConfiguration'
-import {redRunInConsole, redRunInGuiConsole, redCompileInConsole, redCompileInGuiConsole, setCommandMenu} from './commandsProvider'
+import {RedConfiguration} from  './RedConfiguration';
+import {redRunInConsole, redRunInGuiConsole, redCompileInConsole, redCompileInGuiConsole, setCommandMenu} from './commandsProvider';
 import * as vscodelc from 'vscode-languageclient';
 import * as path from 'path';
 
@@ -22,7 +22,7 @@ export function activate(context: vscode.ExtensionContext) {
 	context.subscriptions.push(vscode.commands.registerCommand("reds.compileGUI", () => redCompileInGuiConsole()));
 	context.subscriptions.push(vscode.commands.registerCommand("red.commandMenu", setCommandMenu));
 
-	console.log("Red console path: ", config.redConsole)
+	console.log("Red console path: ", config.redConsole);
 	let serverModule = path.join(context.asAbsolutePath("."), "server", "server.red");
 	let needlog = "debug-off";
 	if (config.needRlsDebug) {
@@ -39,7 +39,7 @@ export function activate(context: vscode.ExtensionContext) {
 		synchronize: {
 			configurationSection: 'red'
 		}
-	}
+	};
 	reddClient = new vscodelc.LanguageClient('red.server', 'Red Language Server', serverOptions, clientOptions);
 	console.log('Red Language Server is now active!');
 	context.subscriptions.push(reddClient.start());

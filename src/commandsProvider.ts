@@ -11,13 +11,13 @@ export function redRunInConsole(fileUri?: vscode.Uri) {
 	let redTool = redConfigs.redToolChain;
 	let toolChain = true;
 	let fileState = getFileState(fileUri);
-	if (fileState.filePath == '') {return}
+	if (fileState.filePath === '') {return;}
 	if (fileState.redsystem) {
 		vscode.window.showErrorMessage("can't run red/system file in terminal");
 		return;
 	}
 
-	if (redTool == '') {
+	if (redTool === '') {
 		redTool = redConfigs.redConsole;
 		toolChain = false;
 	}
@@ -29,13 +29,13 @@ export function redRunInGuiConsole(fileUri?: vscode.Uri) {
 	let redConfigs = RedConfiguration.getInstance();
 	let redTool = redConfigs.redToolChain;
 	let fileState = getFileState(fileUri);
-	if (fileState.filePath == '') {return}
+	if (fileState.filePath === '') {return;}
 	if (fileState.redsystem) {
 		vscode.window.showErrorMessage("can't run red/system file in terminal");
 		return;
 	}
 
-	if (redTool == '') {
+	if (redTool === '') {
 		redTool = redConfigs.redGuiConsole;
 	}
 
@@ -46,9 +46,9 @@ export function redCompileInConsole(fileUri?: vscode.Uri) {
 	let redConfigs = RedConfiguration.getInstance();
 	let redTool = redConfigs.redToolChain;
 	let fileState = getFileState(fileUri);
-	if (fileState.filePath == '') {return}
+	if (fileState.filePath === '') {return;}
 
-	if (redTool != '') {
+	if (redTool !== '') {
 		execCommand(redTool, true, fileState, false);
 	} else {
 		vscode.window.showErrorMessage('No Red compiler! Please configure the `red.redPath` in `settings.json`');
@@ -59,9 +59,9 @@ export function redCompileInGuiConsole(fileUri?: vscode.Uri) {
 	let redConfigs = RedConfiguration.getInstance();
 	let redTool = redConfigs.redToolChain;
 	let fileState = getFileState(fileUri);
-	if (fileState.filePath == '') {return}
+	if (fileState.filePath === '') {return;}
 
-	if (redTool != '') {
+	if (redTool !== '') {
 		execCommand(redTool, true, fileState, true);
 	} else {
 		vscode.window.showErrorMessage('No Red compiler! Please configure the `red.redPath` in `settings.json`');
@@ -105,9 +105,12 @@ function execCommand(tool: string, compileMode: boolean, fileState: {filePath: s
 		let outputFilename: string;
 		buildDir = redConfigs.redWorkSpace || vscode.workspace.rootPath || path.dirname(fileState.filePath);
 		outputFilename = path.join(buildDir, path.parse(fileState.filePath).name);
-		if (guiMode && (process.platform == 'win32' || process.platform == 'darwin')) {
+		if (process.platform === 'win32') {
+			outputFilename = outputFilename + ".exe";
+		}
+		if (guiMode && (process.platform === 'win32' || process.platform === 'darwin')) {
 			let target: string;
-			if (process.platform == 'win32') {
+			if (process.platform === 'win32') {
 				target = "Windows";
 			} else {
 				target = "macOS";
@@ -120,7 +123,7 @@ function execCommand(tool: string, compileMode: boolean, fileState: {filePath: s
 			if (toolChain) {
 				text = `${tool} --cli "${fileState.filePath}"`;
 			} else {
-				text = `${tool} "${fileState.filePath}"`
+				text = `${tool} "${fileState.filePath}"`;
 			}
 	}
 	terminal.sendText(text);
