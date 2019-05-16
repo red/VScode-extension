@@ -105,7 +105,7 @@
             },
             {
                 "command": "red.clear",
-                "title": "Delete all temporary files (like libRedRT)",
+                "title": "Delete all temporary files (libRedRT, etc)",
                 "category": "Red"
             },
             {

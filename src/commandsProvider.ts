@@ -261,7 +261,7 @@ export function setCommandMenu() {
 			command: 'red.compileRelease'
 		},
 		{
-			label: 'Delete all temporary files (like libRedRT)',
+			label: 'Delete all temporary files (libRedRT, etc)',
 			description: '',
 			command: 'red.clear'
 		},
