@@ -52,11 +52,15 @@ If you are using Linux and prefer to use the Windows version of Red through Wine
 
 ## Shortcuts
 
-| Key                       | Command                    | Command id      |
-| :------------------------ | -------------------------- | --------------- |
-| <kbd>F6</kbd>             | Interpret Current Red File | red.interpret   |
-| <kbd>F7</kbd>             | Compile Current Red File   | red.compile     |
-| <kbd>Ctrl+K Ctrl+M</kbd>  | Show Red Command Menu      | red.commandMenu |
+| Key                       | Command                           | Command id         |
+| :------------------------ | --------------------------------- | ------------------ |
+| <kbd>F6</kbd>             | Interpret Current Red File        | red.interpret      |
+| <kbd>Ctrl+F6</kbd>        | Interpret Current Red File(GUI)   | red.interpretGUI   |
+| <kbd>F7</kbd>             | Compile Current Red File          | red.compile        |
+| <kbd>Ctrl+F7</kbd>        | Compile Current Red File(GUI)     | red.compileGUI     |
+| <kbd>Ctrl+Shift+F7</kbd>  | Compile Current Red File(Release) | red.compileRelease |
+| <kbd>F8</kbd>             | Compile Current Red/System File   | reds.compile       |
+| <kbd>Ctrl+K Ctrl+M</kbd>  | Show Red Command Menu             | red.commandMenu    |
 
 ## Configurations
 
@@ -81,10 +85,12 @@ The following commands are available for the Red extension. These can be associa
 ```javascript
 [
     { "key": "f6",                    "command": "red.interpret" },
+    { "key": "ctrl+f6",               "command": "red.interpretGUI" },
     { "key": "f7",                    "command": "red.compile" },
+    { "key": "ctrl+f7",               "command": "red.compileGUI" },
+    { "key": "ctrl+shift+f7",         "command": "red.compileRelease" },
+    { "key": "f8",                    "command": "reds.compile" },
     { "key": "ctrl+k ctrl+m",         "command": "red.commandMenu" },
-    { "key": "",                      "command": "red.interpretGUI" },
-    { "key": "",                      "command": "red.compileGUI" }
 ]
 ```
 
