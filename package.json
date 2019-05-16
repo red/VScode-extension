@@ -158,6 +158,11 @@
                 },
                 {
                     "when": "resourceLangId == red",
+                    "command": "red.interpretGUI",
+                    "group": "Red"
+                },
+                {
+                    "when": "resourceLangId == red",
                     "command": "red.compile",
                     "group": "Red"
                 },
@@ -176,6 +181,11 @@
                 {
                     "when": "resourceLangId == red",
                     "command": "red.interpret",
+                    "group": "Red"
+                },
+                {
+                    "when": "resourceLangId == red",
+                    "command": "red.interpretGUI",
                     "group": "Red"
                 },
                 {
