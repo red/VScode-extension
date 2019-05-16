@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.3.3
+
+### Bug fixes
+
+* fix tslint issues for js
+* fix key bindings issue
+
+### new features
+
+* support command `compile Red in Release mode`
+* support command `clear/update libRedRT`
+
+
 ## 0.3.2
 
 ### new features
