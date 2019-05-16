@@ -2,7 +2,7 @@
     "name": "red",
     "displayName": "Red",
     "description": "Syntax Coloring, Intellisense, Snippets and more",
-    "version": "0.3.3",
+    "version": "0.3.4",
     "publisher": "red-auto",
     "license": "BSL-1.0",
     "homepage": "https://github.com/red/VScode-extension/blob/master/README.md",
@@ -131,18 +131,6 @@
             {
                 "command": "red.compile",
                 "key": "F7"
-            },
-            {
-                "command": "red.compileGUI",
-                "key": "ctrl+F7"
-            },
-            {
-                "command": "red.compileRelease",
-                "key": "ctrl+shift+F7"
-            },
-            {
-                "command": "reds.compile",
-                "key": "F8"
             },
             {
                 "command": "red.commandMenu",
