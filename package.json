@@ -95,17 +95,17 @@
             },
             {
                 "command": "red.compileGUI",
-                "title": "Compile Current Script in GUI mode",
+                "title": "Compile Current Script (GUI mode)",
                 "category": "Red"
             },
             {
                 "command": "red.compileRelease",
-                "title": "Compile Current Script in Release mode",
+                "title": "Compile Current Script (Release mode)",
                 "category": "Red"
             },
             {
                 "command": "red.clear",
-                "title": "Delete all temporary files(like libRedRT)",
+                "title": "Delete all temporary files (like libRedRT)",
                 "category": "Red"
             },
             {

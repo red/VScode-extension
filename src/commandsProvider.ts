@@ -251,17 +251,17 @@ export function setCommandMenu() {
 			command: 'red.compile'
 		},
 		{
-			label: 'Compile Current Script in GUI mode',
+			label: 'Compile Current Script (GUI mode)',
 			description: '',
 			command: 'red.compileGUI'
 		},
 		{
-			label: 'Compile Current Script in Release mode',
+			label: 'Compile Current Script (Release mode)',
 			description: '',
 			command: 'red.compileRelease'
 		},
 		{
-			label: 'Delete all temporary files(like libRedRT)',
+			label: 'Delete all temporary files (like libRedRT)',
 			description: '',
 			command: 'red.clear'
 		},
