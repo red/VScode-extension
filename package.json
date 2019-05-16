@@ -29,8 +29,10 @@
         "onCommand:red.interpretGUI",
         "onCommand:red.compile",
         "onCommand:red.compileGUI",
-        "onCommand:reds.compile",
-        "onCommand:reds.compileGUI"
+        "onCommand:red.compileRelease",
+        "onCommand:red.clear",
+        "onCommand:red.update",
+        "onCommand:reds.compile"
     ],
     "main": "./out/extension",
     "contributes": {
@@ -97,13 +99,23 @@
                 "category": "Red"
             },
             {
-                "command": "reds.compile",
-                "title": "Compile Red/System Script",
-                "category": "Red/System"
+                "command": "red.compileRelease",
+                "title": "Compile Red Script in Release mode",
+                "category": "Red"
             },
             {
-                "command": "reds.compileGUI",
-                "title": "Compile Red/System Script in GUI mode",
+                "command": "red.clear",
+                "title": "Clear libRedRT",
+                "category": "Red"
+            },
+            {
+                "command": "red.update",
+                "title": "Update libRedRT",
+                "category": "Red"
+            },
+            {
+                "command": "reds.compile",
+                "title": "Compile Red/System Script",
                 "category": "Red/System"
             }
         ],
@@ -113,12 +125,24 @@
                 "key": "F6"
             },
             {
+                "command": "red.interpretGUI",
+                "key": "ctrl+F6"
+            },
+            {
                 "command": "red.compile",
                 "key": "F7"
             },
             {
+                "command": "red.compileGUI",
+                "key": "ctrl+F7"
+            },
+            {
+                "command": "red.compileRelease",
+                "key": "ctrl+shift+F7"
+            },
+            {
                 "command": "reds.compile",
-                "key": "F7"
+                "key": "F8"
             },
             {
                 "command": "red.commandMenu",
@@ -138,6 +162,11 @@
                     "group": "Red"
                 },
                 {
+                    "when": "resourceLangId == red",
+                    "command": "red.compileRelease",
+                    "group": "Red"
+                },
+                {
                     "when": "resourceLangId == reds",
                     "command": "reds.compile",
                     "group": "Red/System"
@@ -152,6 +181,11 @@
                 {
                     "when": "resourceLangId == red",
                     "command": "red.compile",
+                    "group": "Red"
+                },
+                {
+                    "when": "resourceLangId == red",
+                    "command": "red.compileRelease",
                     "group": "Red"
                 },
                 {
