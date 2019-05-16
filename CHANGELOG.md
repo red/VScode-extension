@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.3.4
+
+### new features
+
+* remove uncommon key bindings
+
 ## 0.3.3
 
 ### Bug fixes
