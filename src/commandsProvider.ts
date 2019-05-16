@@ -113,6 +113,10 @@ export function redCompileInConsole(fileUri?: vscode.Uri) {
 	let filePath = getFileName(fileUri);
 	if (filePath === '') {return;}
 	let ext = path.parse(filePath).ext.toLowerCase();
+	if (ext === ".reds") {
+		redsCompile(fileUri);
+		return;
+	}
 	if (ext !== ".red") {
 		vscode.window.showErrorMessage("don't support " + ext + " file");
 		return;
@@ -207,7 +211,7 @@ export function redCompileUpdate(fileUri?: vscode.Uri) {
 	execCommand(command);
 }
 
-export function redsCompile(fileUri?: vscode.Uri) {
+function redsCompile(fileUri?: vscode.Uri) {
 	let redConfigs = RedConfiguration.getInstance();
 	let redTool = redConfigs.redToolChain;
 	if (redTool === '') {
@@ -232,44 +236,39 @@ export function redsCompile(fileUri?: vscode.Uri) {
 export function setCommandMenu() {
 	const options = [
 		{
-			label: 'Run Red Script',
+			label: 'Run Current Script',
 			description: '',
 			command: 'red.interpret'
 		},
 		{
-			label: 'Run Red Script in GUI Console',
+			label: 'Run Current Script in GUI Console',
 			description: '',
 			command: 'red.interpretGUI'
 		},
 		{
-			label: 'Compile Red Script',
+			label: 'Compile Current Script',
 			description: '',
 			command: 'red.compile'
 		},
 		{
-			label: 'Compile Red Script in GUI mode',
+			label: 'Compile Current Script in GUI mode',
 			description: '',
 			command: 'red.compileGUI'
 		},
 		{
-			label: 'Compile Red Script in Release mode',
+			label: 'Compile Current Script in Release mode',
 			description: '',
 			command: 'red.compileRelease'
 		},
 		{
-			label: 'Clear libRedRT',
+			label: 'Delete all temporary files(like libRedRT)',
 			description: '',
 			command: 'red.clear'
 		},
 		{
-			label: 'Update libRedRT',
+			label: 'Update libRedRT and Compile Current script',
 			description: '',
 			command: 'red.update'
-		},
-		{
-			label: 'Compile Red/System Script',
-			description: '',
-			command: 'reds.compile'
 		}
 	];
 	vscode.window.showQuickPick(options).then(option => {

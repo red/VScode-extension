@@ -3,7 +3,7 @@
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
 import {RedConfiguration} from  './RedConfiguration';
-import {redRunInConsole, redRunInGuiConsole, redCompileInConsole, redCompileInGuiConsole, setCommandMenu, redCompileInRelease, redCompileClear, redCompileUpdate, redsCompile} from './commandsProvider';
+import {redRunInConsole, redRunInGuiConsole, redCompileInConsole, redCompileInGuiConsole, setCommandMenu, redCompileInRelease, redCompileClear, redCompileUpdate} from './commandsProvider';
 import * as vscodelc from 'vscode-languageclient';
 import * as path from 'path';
 
@@ -21,7 +21,6 @@ export function activate(context: vscode.ExtensionContext) {
 	context.subscriptions.push(vscode.commands.registerCommand("red.compileRelease", () => redCompileInRelease()));
 	context.subscriptions.push(vscode.commands.registerCommand("red.clear", () => redCompileClear()));
 	context.subscriptions.push(vscode.commands.registerCommand("red.update", () => redCompileUpdate()));
-	context.subscriptions.push(vscode.commands.registerCommand("reds.compile", () => redsCompile()));
 	context.subscriptions.push(vscode.commands.registerCommand("red.commandMenu", setCommandMenu));
 
 	console.log("Red console path: ", config.redConsole);

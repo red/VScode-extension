@@ -80,43 +80,38 @@
             },
             {
                 "command": "red.interpret",
-                "title": "Run Red Script",
+                "title": "Run Current Script",
                 "category": "Red"
             },
             {
                 "command": "red.interpretGUI",
-                "title": "Run Red Script in GUI console",
+                "title": "Run Current Script in GUI Console",
                 "category": "Red"
             },
             {
                 "command": "red.compile",
-                "title": "Compile Red Script",
+                "title": "Compile Current Script",
                 "category": "Red"
             },
             {
                 "command": "red.compileGUI",
-                "title": "Compile Red Script in GUI mode",
+                "title": "Compile Current Script in GUI mode",
                 "category": "Red"
             },
             {
                 "command": "red.compileRelease",
-                "title": "Compile Red Script in Release mode",
+                "title": "Compile Current Script in Release mode",
                 "category": "Red"
             },
             {
                 "command": "red.clear",
-                "title": "Clear libRedRT",
+                "title": "Delete all temporary files(like libRedRT)",
                 "category": "Red"
             },
             {
                 "command": "red.update",
-                "title": "Update libRedRT",
+                "title": "Update libRedRT and Compile Current script",
                 "category": "Red"
-            },
-            {
-                "command": "reds.compile",
-                "title": "Compile Red/System Script",
-                "category": "Red/System"
             }
         ],
         "keybindings": [
@@ -161,8 +156,8 @@
                 },
                 {
                     "when": "resourceLangId == reds",
-                    "command": "reds.compile",
-                    "group": "Red/System"
+                    "command": "red.compile",
+                    "group": "Reds"
                 }
             ],
             "explorer/context": [
@@ -188,8 +183,8 @@
                 },
                 {
                     "when": "resourceLangId == reds",
-                    "command": "reds.compile",
-                    "group": "Red/System"
+                    "command": "red.compile",
+                    "group": "Reds"
                 }
             ]
         },
