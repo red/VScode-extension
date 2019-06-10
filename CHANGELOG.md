@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.3.5
+
+### Bug fixes
+
+* issue #34
+
 ## 0.3.4
 
 ### new features
