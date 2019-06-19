@@ -5,6 +5,8 @@
 ### Bug fixes
 
 * issue #34
+* use Red's internal json module
+* use new `write-stdout` function
 
 ## 0.3.4
 
