@@ -73,6 +73,10 @@ export class RedConfiguration {
 		return this.configuration.get<string>('red.redPath', '');
 	}
 
+	public get redExcludedPath(): string { 
+		return this.configuration.get<string>('red.excludedPath', ''); 
+	}
+
 	public get redConsole(): string {
 		return getRedConsole(false);
 	}

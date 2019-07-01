@@ -197,6 +197,11 @@
                     "default": "",
                     "description": "Path to Red toolchain"
                 },
+                "red.excludedPath": { 
+                    "type": "string", 
+                    "default": "tests/", 
+                    "description": "sub-folders be excluded" 
+                },
                 "red.buildDir": {
                     "type": "string",
                     "default": "",
