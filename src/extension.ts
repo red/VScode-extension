@@ -35,10 +35,13 @@ export function activate(context: vscode.ExtensionContext) {
 		debug: { command: config.redConsole, args: [serverModule, "debug-on"] }
 	};
 	const clientOptions: vscodelc.LanguageClientOptions = {
-		documentSelector: [{scheme: 'file', language: 'red'}],
+		documentSelector: [
+			{scheme: 'file', language: 'red'},
+			{scheme: 'file', language: 'reds'}
+		],
 		initializationOptions: config.allConfigs || {},
 		synchronize: {
-			configurationSection: 'red'
+			configurationSection: ['red', 'reds']
 		}
 	};
 	reddClient = new vscodelc.LanguageClient('red.server', 'Red Language Server', serverOptions, clientOptions);
