@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.3.6
+
+### Bug fixes
+
+* issue #35 (not completely resolved)
+
+### new features
+* support `parse Red/System semantic`
+
 ## 0.3.5
 
 ### Bug fixes
