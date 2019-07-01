@@ -29,11 +29,15 @@ function getOutFileName(buildDir: string, filePath: string): string {
 	return outName;
 }
 
-function execCommand(command: string) {
-	let text: string;
+function execCommand(command: string, args: string) {
+	let text: string = "";
 
 	terminal = terminal ? terminal : vscode.window.createTerminal(`Red`);
-	text = `${command}`;
+	if (process.platform === 'win32') {
+		text = "cmd /c ";
+	}
+	text = text + "\"" + command + "\"";
+	text = text + " " + args;
 	terminal.sendText(text);
 	terminal.show();
 }
@@ -71,15 +75,19 @@ export function redRunInConsole(fileUri?: vscode.Uri) {
 		vscode.window.showErrorMessage("don't support " + ext + " file");
 		return;
 	}
+	filePath = "\"" + filePath + "\"";
 
 	let command: string;
+	let args: string;
 	if (redTool === '') {
-		command = redConfigs.redConsole + " " + filePath;
+		command = redConfigs.redConsole;
+		args = filePath;
 	} else {
-		command = redTool + " --cli " + filePath;
+		command = redTool;
+		args = "--cli " + filePath;
 	}
 
-	execCommand(command);
+	execCommand(command, args);
 }
 
 export function redRunInGuiConsole(fileUri?: vscode.Uri) {
@@ -92,15 +100,19 @@ export function redRunInGuiConsole(fileUri?: vscode.Uri) {
 		vscode.window.showErrorMessage("don't support " + ext + " file");
 		return;
 	}
+	filePath = "\"" + filePath + "\"";
 
 	let command: string;
+	let args: string;
 	if (redTool === '') {
-		command = redConfigs.redGuiConsole + " " + filePath;
+		command = redConfigs.redGuiConsole;
+		args = filePath;
 	} else {
-		command = redTool + " " + filePath;
+		command = redTool;
+		args = filePath;
 	}
 
-	execCommand(command);
+	execCommand(command, args);
 }
 
 export function redCompileInConsole(fileUri?: vscode.Uri) {
@@ -121,12 +133,16 @@ export function redCompileInConsole(fileUri?: vscode.Uri) {
 		vscode.window.showErrorMessage("don't support " + ext + " file");
 		return;
 	}
+	filePath = "\"" + filePath + "\"";
 
 	let buildDir = getBuildDir(filePath);
 	let outName = getOutFileName(buildDir, filePath);
+	outName = "\"" + outName + "\"";
 
-	let command= redTool + " -c " + filePath + " -o " + outName;
-	execCommand(command);
+
+	let command= redTool;
+	let args = "-c " + filePath + " -o " + outName;
+	execCommand(command, args);
 }
 
 export function redCompileInGuiConsole(fileUri?: vscode.Uri) {
@@ -143,13 +159,16 @@ export function redCompileInGuiConsole(fileUri?: vscode.Uri) {
 		vscode.window.showErrorMessage("don't support " + ext + " file");
 		return;
 	}
+	filePath = "\"" + filePath + "\"";
 
 	let buildDir = getBuildDir(filePath);
 	let outName = getOutFileName(buildDir, filePath);
 	let target = getTarget();
+	outName = "\"" + outName + "\"";
 
-	let command= redTool + " -t " + target + " -c " + filePath + " -o " + outName;
-	execCommand(command);
+	let command= redTool;
+	let args = "-t " + target + " -c " + filePath + " -o " + outName;
+	execCommand(command, args);
 }
 
 export function redCompileInRelease(fileUri?: vscode.Uri) {
@@ -166,13 +185,16 @@ export function redCompileInRelease(fileUri?: vscode.Uri) {
 		vscode.window.showErrorMessage("don't support " + ext + " file");
 		return;
 	}
+	filePath = "\"" + filePath + "\"";
 
 	let buildDir = getBuildDir(filePath);
 	let outName = getOutFileName(buildDir, filePath);
 	let target = getTarget();
+	outName = "\"" + outName + "\"";
 
-	let command= redTool + " -t " + target + " -r " + filePath + " -o " + outName;
-	execCommand(command);
+	let command= redTool;
+	let args = "-t " + target + " -r " + filePath + " -o " + outName;
+	execCommand(command, args);
 }
 
 export function redCompileClear(fileUri?: vscode.Uri) {
@@ -184,9 +206,12 @@ export function redCompileClear(fileUri?: vscode.Uri) {
 	}
 	let filePath = getFileName(fileUri);
 	let buildDir = getBuildDir(filePath);
+	filePath = "\"" + filePath + "\"";
+	buildDir = "\"" + buildDir + "\"";
 
-	let command= redTool + " clear " + buildDir;
-	execCommand(command);
+	let command= redTool;
+	let args = "clear " + buildDir;
+	execCommand(command, args);
 }
 
 export function redCompileUpdate(fileUri?: vscode.Uri) {
@@ -203,12 +228,15 @@ export function redCompileUpdate(fileUri?: vscode.Uri) {
 		vscode.window.showErrorMessage("don't support " + ext + " file");
 		return;
 	}
+	filePath = "\"" + filePath + "\"";
 
 	let buildDir = getBuildDir(filePath);
 	let outName = getOutFileName(buildDir, filePath);
+	outName = "\"" + outName + "\"";
 
-	let command= redTool + " -u -c " + filePath + " -o " + outName;
-	execCommand(command);
+	let command= redTool;
+	let args = "-u -c " + filePath + " -o " + outName;
+	execCommand(command, args);
 }
 
 function redsCompile(fileUri?: vscode.Uri) {
@@ -225,12 +253,15 @@ function redsCompile(fileUri?: vscode.Uri) {
 		vscode.window.showErrorMessage("don't support " + ext + " file");
 		return;
 	}
+	filePath = "\"" + filePath + "\"";
 
 	let buildDir = getBuildDir(filePath);
 	let outName = getOutFileName(buildDir, filePath);
+	outName = "\"" + outName + "\"";
 
-	let command= redTool + " -r " + filePath + " -o " + outName;
-	execCommand(command);
+	let command= redTool;
+	let args = "-r " + filePath + " -o " + outName;
+	execCommand(command, args);
 }
 
 export function setCommandMenu() {
