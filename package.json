@@ -197,10 +197,10 @@
                     "default": "",
                     "description": "Path to Red toolchain"
                 },
-                "red.excludedPath": { 
-                    "type": "string", 
-                    "default": "tests/", 
-                    "description": "sub-folders be excluded" 
+                "red.excludedPath": {
+                    "type": "string",
+                    "default": "tests/",
+                    "description": "sub-folders be excluded"
                 },
                 "red.buildDir": {
                     "type": "string",
@@ -247,10 +247,10 @@
         "vscode-languageclient": "^5.2.1"
     },
     "devDependencies": {
-        "typescript": "^3.5.2",
-        "vscode": "^1.1.35",
-        "tslint": "^5.18.0",
-        "@types/node": "^12.0.10",
+        "typescript": "^3.7.2",
+        "vscode": "^1.1.36",
+        "tslint": "^5.20.1",
+        "@types/node": "^12.12.6",
         "@types/mocha": "^5.2.7"
     }
 }

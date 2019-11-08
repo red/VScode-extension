@@ -5,9 +5,11 @@
 ### Bug fixes
 
 * issue #35 (not completely resolved)
+* issue #39
 
 ### new features
-* support `parse Red/System semantic`
+* support `parse Red/System semantic` (disabled for this version)
+* support workspace
 
 ## 0.3.5
 
