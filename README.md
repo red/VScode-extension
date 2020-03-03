@@ -14,7 +14,9 @@ An extension with rich support for the [Red language](https://www.red-lang.org/)
 * Install the extension
 * Install [Red](http://www.red-lang.org/p/download.html) (Note: For Windows user, need to run ```red.exe --cli```)
 
-  **Note**: latest daily version should be installed for `0.3.x`
+![download](https://raw.githubusercontent.com/red/VScode-extension/master/images/download.png)
+
+  **Note**: latest automated build version should be installed for `0.3.x`, and this extension not worked with last stable version
 
 * Turn off the Auto Completion
 
