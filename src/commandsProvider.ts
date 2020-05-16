@@ -151,7 +151,7 @@ export function redCompileInConsole(fileUri?: vscode.Uri) {
 	filePath = "\"" + filePath + "\"";
 
 	let command= redTool;
-	let args = "-c " + filePath + " -o " + outName;
+	let args = "-c -o " + outName + " " + filePath;
 	command = normalFile(command);
 	execCommand(command, args);
 }
