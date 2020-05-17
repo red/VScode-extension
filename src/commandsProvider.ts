@@ -181,7 +181,7 @@ export function redCompileInGuiConsole(fileUri?: vscode.Uri) {
 	filePath = "\"" + filePath + "\"";
 
 	let command= redTool;
-	let args = "-t " + target + " -c " + filePath + " -o " + outName;
+	let args = "-c -t " + target + " -o " + outName + " " + filePath;
 	command = normalFile(command);
 	execCommand(command, args);
 }
@@ -211,7 +211,7 @@ export function redCompileInRelease(fileUri?: vscode.Uri) {
 	filePath = "\"" + filePath + "\"";
 
 	let command= redTool;
-	let args = "-t " + target + " -r " + filePath + " -o " + outName;
+	let args = "-r -t " + target + " -o " + outName + " " + filePath;
 	command = normalFile(command);
 	execCommand(command, args);
 }
@@ -258,7 +258,7 @@ export function redCompileUpdate(fileUri?: vscode.Uri) {
 	filePath = "\"" + filePath + "\"";
 
 	let command= redTool;
-	let args = "-u -c " + filePath + " -o " + outName;
+	let args = "-u -c -o " + outName + " " + filePath;
 	command = normalFile(command);
 	execCommand(command, args);
 }
@@ -287,7 +287,7 @@ function redsCompile(fileUri?: vscode.Uri) {
 	filePath = "\"" + filePath + "\"";
 
 	let command= redTool;
-	let args = "-r " + filePath + " -o " + outName;
+	let args = "-r -o " + outName + " " + filePath;
 	command = normalFile(command);
 	execCommand(command, args);
 }
