@@ -6,6 +6,9 @@
 
 * use latest fast-lexer console
 
+### Bug fixes
+
+* issue #40
 
 ## 0.3.6
 
