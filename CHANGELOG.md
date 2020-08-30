@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.4.0
+
+### new features
+
+* use latest fast-lexer console
+
+
 ## 0.3.6
 
 ### Bug fixes
