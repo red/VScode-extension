@@ -1,256 +1,263 @@
 {
-    "name": "red",
-    "displayName": "Red",
-    "description": "Syntax Coloring, Intellisense, Snippets and more",
-    "version": "0.3.6",
-    "publisher": "red-auto",
-    "license": "BSL-1.0",
-    "homepage": "https://github.com/red/VScode-extension/blob/master/README.md",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/red/VScode-extension"
-    },
-    "bugs": {
-        "url": "https://github.com/red/VScode-extension/issues"
-    },
-    "icon": "images/icon.png",
-    "engines": {
-        "vscode": "^1.30.0"
-    },
-    "categories": [
-        "Programming Languages",
-        "Snippets",
-        "Other"
-    ],
-    "activationEvents": [
-        "onLanguage:red",
-        "onLanguage:reds",
-        "onCommand:red.interpret",
-        "onCommand:red.interpretGUI",
-        "onCommand:red.compile",
-        "onCommand:red.compileGUI",
-        "onCommand:red.compileRelease",
-        "onCommand:red.clear",
-        "onCommand:red.update",
-        "onCommand:reds.compile"
-    ],
-    "main": "./out/extension",
-    "contributes": {
-        "languages": [
-            {
-                "id": "red",
-                "aliases": [
-                    "Red",
-                    "red"
-                ],
-                "extensions": [
-                    ".red"
-                ],
-                "configuration": "./red.configuration.json"
-            },
-            {
-                "id": "reds",
-                "aliases": [
-                    "Reds",
-                    "reds"
-                ],
-                "extensions": [
-                    ".reds"
-                ],
-                "configuration": "./red.configuration.json"
-            }
-        ],
-        "grammars": [
-            {
-                "language": "red",
-                "scopeName": "source.red",
-                "path": "./syntaxes/Red.tmLanguage.json"
-            },
-            {
-                "language": "reds",
-                "scopeName": "source.red",
-                "path": "./syntaxes/Red.tmLanguage.json"
-            }
-        ],
-        "commands": [
-            {
-                "command": "red.commandMenu",
-                "title": "Show all Red commands",
-                "category": "Red"
-            },
-            {
-                "command": "red.interpret",
-                "title": "Run Current Script",
-                "category": "Red"
-            },
-            {
-                "command": "red.interpretGUI",
-                "title": "Run Current Script in GUI Console",
-                "category": "Red"
-            },
-            {
-                "command": "red.compile",
-                "title": "Compile Current Script",
-                "category": "Red"
-            },
-            {
-                "command": "red.compileGUI",
-                "title": "Compile Current Script (GUI mode)",
-                "category": "Red"
-            },
-            {
-                "command": "red.compileRelease",
-                "title": "Compile Current Script (Release mode)",
-                "category": "Red"
-            },
-            {
-                "command": "red.clear",
-                "title": "Delete all temporary files (libRedRT, etc)",
-                "category": "Red"
-            },
-            {
-                "command": "red.update",
-                "title": "Update libRedRT and Compile Current script",
-                "category": "Red"
-            }
-        ],
-        "keybindings": [
-            {
-                "command": "red.interpret",
-                "key": "F6"
-            },
-            {
-                "command": "red.interpretGUI",
-                "key": "ctrl+F6"
-            },
-            {
-                "command": "red.compile",
-                "key": "F7"
-            },
-            {
-                "command": "red.commandMenu",
-                "key": "ctrl+k ctrl+m"
-            }
-        ],
-        "menus": {
-            "editor/context": [
-                {
-                    "when": "resourceLangId == red",
-                    "command": "red.interpret",
-                    "group": "Red"
-                },
-                {
-                    "when": "resourceLangId == red",
-                    "command": "red.interpretGUI",
-                    "group": "Red"
-                },
-                {
-                    "when": "resourceLangId == red",
-                    "command": "red.compile",
-                    "group": "Red"
-                },
-                {
-                    "when": "resourceLangId == red",
-                    "command": "red.compileRelease",
-                    "group": "Red"
-                },
-                {
-                    "when": "resourceLangId == reds",
-                    "command": "red.compile",
-                    "group": "Reds"
-                }
-            ],
-            "explorer/context": [
-                {
-                    "when": "resourceLangId == red",
-                    "command": "red.interpret",
-                    "group": "Red"
-                },
-                {
-                    "when": "resourceLangId == red",
-                    "command": "red.interpretGUI",
-                    "group": "Red"
-                },
-                {
-                    "when": "resourceLangId == red",
-                    "command": "red.compile",
-                    "group": "Red"
-                },
-                {
-                    "when": "resourceLangId == red",
-                    "command": "red.compileRelease",
-                    "group": "Red"
-                },
-                {
-                    "when": "resourceLangId == reds",
-                    "command": "red.compile",
-                    "group": "Reds"
-                }
-            ]
-        },
-        "configuration": {
-            "type": "object",
-            "title": "Red Configuration",
-            "properties": {
-                "red.redPath": {
-                    "type": "string",
-                    "default": "",
-                    "description": "Path to Red toolchain"
-                },
-                "red.excludedPath": {
-                    "type": "string",
-                    "default": "tests/",
-                    "description": "sub-folders be excluded"
-                },
-                "red.buildDir": {
-                    "type": "string",
-                    "default": "",
-                    "description": "Directory to put compiling result of Red Source file. If not set, use workspace root directory by default."
-                },
-                "red.devOptions": {
-                    "type": "array",
-                    "default": [],
-                    "description": "Advanced options used to enable new features or produce detailed diagnostics to identify extension issues."
-                },
-                "red.autoComplete": {
-                    "type": "boolean",
-                    "default": true,
-                    "description": "Whether to enable or disable autocompletion."
-                },
-                "red.rls-debug": {
-                    "type": "boolean",
-                    "default": false,
-                    "description": "Whether to enable or disable 'Red language server' debug."
-                },
-                "red.server.trace.server": {
-                    "scope": "window",
-                    "type": "string",
-                    "enum": [
-                        "off",
-                        "messages",
-                        "verbose"
-                    ],
-                    "default": "off",
-                    "description": "Traces the communication between VS Code and the language server."
-                }
-            }
-        }
-    },
-    "scripts": {
-        "vscode:prepublish": "npm run compile",
-        "compile": "tsc -p ./",
-        "watch": "tsc -watch -p ./",
-        "postinstall": "node ./node_modules/vscode/bin/install",
-        "test": "npm run compile && node ./node_modules/vscode/bin/test"
-    },
-    "dependencies": {
-        "vscode-languageclient": "^5.2.1"
-    },
-    "devDependencies": {
-        "typescript": "^3.7.2",
-        "vscode": "^1.1.36",
-        "tslint": "^5.20.1",
-        "@types/node": "^12.12.6",
-        "@types/mocha": "^5.2.7"
-    }
+	"name": "red",
+	"displayName": "Red",
+	"description": "Syntax Coloring, Intellisense, Snippets and more",
+	"version": "0.4.0",
+	"publisher": "red-auto",
+	"license": "BSL-1.0",
+	"homepage": "https://github.com/red/VScode-extension/blob/master/README.md",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/red/VScode-extension"
+	},
+	"bugs": {
+		"url": "https://github.com/red/VScode-extension/issues"
+	},
+	"icon": "images/icon.png",
+	"engines": {
+		"vscode": "^1.47.0"
+	},
+	"categories": [
+		"Programming Languages",
+		"Snippets",
+		"Other"
+	],
+	"activationEvents": [
+		"onLanguage:red",
+		"onLanguage:reds",
+		"onCommand:red.interpret",
+		"onCommand:red.interpretGUI",
+		"onCommand:red.compile",
+		"onCommand:red.compileGUI",
+		"onCommand:red.compileRelease",
+		"onCommand:red.clear",
+		"onCommand:red.update",
+		"onCommand:reds.compile"
+	],
+	"main": "./out/extension.js",
+	"contributes": {
+		"languages": [
+			{
+				"id": "red",
+				"aliases": [
+					"Red",
+					"red"
+				],
+				"extensions": [
+					".red"
+				],
+				"configuration": "./red.configuration.json"
+			},
+			{
+				"id": "reds",
+				"aliases": [
+					"Reds",
+					"reds"
+				],
+				"extensions": [
+					".reds"
+				],
+				"configuration": "./red.configuration.json"
+			}
+		],
+		"grammars": [
+			{
+				"language": "red",
+				"scopeName": "source.red",
+				"path": "./syntaxes/Red.tmLanguage.json"
+			},
+			{
+				"language": "reds",
+				"scopeName": "source.red",
+				"path": "./syntaxes/Red.tmLanguage.json"
+			}
+		],
+		"commands": [
+			{
+				"command": "red.commandMenu",
+				"title": "Show all Red commands",
+				"category": "Red"
+			},
+			{
+				"command": "red.interpret",
+				"title": "Run Current Script",
+				"category": "Red"
+			},
+			{
+				"command": "red.interpretGUI",
+				"title": "Run Current Script in GUI Console",
+				"category": "Red"
+			},
+			{
+				"command": "red.compile",
+				"title": "Compile Current Script",
+				"category": "Red"
+			},
+			{
+				"command": "red.compileGUI",
+				"title": "Compile Current Script (GUI mode)",
+				"category": "Red"
+			},
+			{
+				"command": "red.compileRelease",
+				"title": "Compile Current Script (Release mode)",
+				"category": "Red"
+			},
+			{
+				"command": "red.clear",
+				"title": "Delete all temporary files (libRedRT, etc)",
+				"category": "Red"
+			},
+			{
+				"command": "red.update",
+				"title": "Update libRedRT and Compile Current script",
+				"category": "Red"
+			}
+		],
+		"keybindings": [
+			{
+				"command": "red.interpret",
+				"key": "F6"
+			},
+			{
+				"command": "red.interpretGUI",
+				"key": "ctrl+F6"
+			},
+			{
+				"command": "red.compile",
+				"key": "F7"
+			},
+			{
+				"command": "red.commandMenu",
+				"key": "ctrl+k ctrl+m"
+			}
+		],
+		"menus": {
+			"editor/context": [
+				{
+					"when": "resourceLangId == red",
+					"command": "red.interpret",
+					"group": "Red"
+				},
+				{
+					"when": "resourceLangId == red",
+					"command": "red.interpretGUI",
+					"group": "Red"
+				},
+				{
+					"when": "resourceLangId == red",
+					"command": "red.compile",
+					"group": "Red"
+				},
+				{
+					"when": "resourceLangId == red",
+					"command": "red.compileRelease",
+					"group": "Red"
+				},
+				{
+					"when": "resourceLangId == reds",
+					"command": "red.compile",
+					"group": "Reds"
+				}
+			],
+			"explorer/context": [
+				{
+					"when": "resourceLangId == red",
+					"command": "red.interpret",
+					"group": "Red"
+				},
+				{
+					"when": "resourceLangId == red",
+					"command": "red.interpretGUI",
+					"group": "Red"
+				},
+				{
+					"when": "resourceLangId == red",
+					"command": "red.compile",
+					"group": "Red"
+				},
+				{
+					"when": "resourceLangId == red",
+					"command": "red.compileRelease",
+					"group": "Red"
+				},
+				{
+					"when": "resourceLangId == reds",
+					"command": "red.compile",
+					"group": "Reds"
+				}
+			]
+		},
+		"configuration": {
+			"type": "object",
+			"title": "Red Configuration",
+			"properties": {
+				"red.redPath": {
+					"type": "string",
+					"default": "",
+					"description": "Path to Red toolchain"
+				},
+				"red.excludedPath": {
+					"type": "string",
+					"default": "tests/",
+					"description": "sub-folders be excluded"
+				},
+				"red.buildDir": {
+					"type": "string",
+					"default": "",
+					"description": "Directory to put compiling result of Red Source file. If not set, use workspace root directory by default."
+				},
+				"red.devOptions": {
+					"type": "array",
+					"default": [],
+					"description": "Advanced options used to enable new features or produce detailed diagnostics to identify extension issues."
+				},
+				"red.autoComplete": {
+					"type": "boolean",
+					"default": true,
+					"description": "Whether to enable or disable autocompletion."
+				},
+				"red.rls-debug": {
+					"type": "boolean",
+					"default": false,
+					"description": "Whether to enable or disable 'Red language server' debug."
+				},
+				"red.server.trace.server": {
+					"scope": "window",
+					"type": "string",
+					"enum": [
+						"off",
+						"messages",
+						"verbose"
+					],
+					"default": "off",
+					"description": "Traces the communication between VS Code and the language server."
+				}
+			}
+		}
+	},
+	"scripts": {
+		"vscode:prepublish": "npm run compile",
+		"compile": "tsc -p ./",
+		"lint": "eslint src --ext ts",
+		"watch": "tsc -watch -p ./",
+		"pretest": "npm run compile && npm run lint",
+		"test": "node ./out/test/runTest.js"
+	},
+	"devDependencies": {
+		"@types/vscode": "^1.48.0",
+		"@types/glob": "^7.1.3",
+		"@types/mocha": "^8.0.3",
+		"@types/node": "^14.6.2",
+		"eslint": "^7.7.0",
+		"@typescript-eslint/parser": "^3.10.1",
+		"@typescript-eslint/eslint-plugin": "^3.10.1",
+		"glob": "^7.1.6",
+		"mocha": "^8.1.3",
+		"typescript": "^4.0.2",
+		"vscode-test": "^1.4.0"
+	},
+	"dependencies": {
+		"vscode-languageclient": "^6.1.3"
+	}
 }
