@@ -14,7 +14,7 @@ An extension with rich support for the [Red language](https://www.red-lang.org/)
 * Install the extension
 * Install [Red](http://www.red-lang.org/p/download.html) (Note: For Windows user, need to run ```red.exe --cli```)
 
-![download](https://raw.githubusercontent.com/red/VScode-extension/master/images/download.png)
+![download](https://cdn.jsdelivr.net/gh/red/VScode-extension@0.4.0/images/download.png)
 
   **Note**: latest automated build version should be installed for `0.3.x`, and this extension not worked with last stable version
 
@@ -94,31 +94,28 @@ The following commands are available for the Red extension. These can be associa
 
 * diagnostics
 
-![Image of Completions](https://raw.githubusercontent.com/red/VScode-extension/master/images/diagnostics.gif)
+![Image of Completions](https://cdn.jsdelivr.net/gh/red/VScode-extension@0.4.0/images/diagnostics.gif)
 
 * auto completion
 
-![Image of Completions](https://raw.githubusercontent.com/red/VScode-extension/master/images/completion.gif)
+![Image of Completions](https://cdn.jsdelivr.net/gh/red/VScode-extension@0.4.0/images/completion.gif)
 
 * goto definition
 
-![Image of Goto Definition](https://raw.githubusercontent.com/red/VScode-extension/master/images/goto-definition.gif)
+![Image of Goto Definition](https://cdn.jsdelivr.net/gh/red/VScode-extension@0.4.0/images/goto-definition.gif)
 
 * navigate to any symbol definition
 
-![Image of Goto Definition](https://raw.githubusercontent.com/red/VScode-extension/master/images/goto-symbols.gif)
+![Image of Goto Definition](https://cdn.jsdelivr.net/gh/red/VScode-extension@0.4.0/images/goto-symbols.gif)
 
 * hover to view signatures
 
-![Image of Goto Definition](https://raw.githubusercontent.com/red/VScode-extension/master/images/hover.gif)
+![Image of Goto Definition](https://cdn.jsdelivr.net/gh/red/VScode-extension@0.4.0/images/hover.gif)
 
 * Interpret or compile Red source file
 
-![Image of Red Command Menu](https://raw.githubusercontent.com/red/VScode-extension/master/images/redmenu.gif)
+![Image of Red Command Menu](https://cdn.jsdelivr.net/gh/red/VScode-extension@0.4.0/images/redmenu.gif)
 
-* old Screenshots
-
-![Image of General Features](https://raw.githubusercontent.com/red/VScode-extension/master/images/general.gif)
 
 ## [Issues, Feature Requests and Contributions](https://github.com/red/VScode-extension/issues)
 
