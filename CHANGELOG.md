@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.4.1
+
+### new features
+
+* improve lexer performance
+* disable `parse all folders`
+* add intelligence config
+* `goto definition` on file!
+
+### Bug fixes
+
+* issue #35
+
 ## 0.4.0
 
 ### new features
