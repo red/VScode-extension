@@ -22,6 +22,8 @@ export function activate(context: vscode.ExtensionContext) {
 	context.subscriptions.push(vscode.commands.registerCommand("red.clear", () => redCompileClear()));
 	context.subscriptions.push(vscode.commands.registerCommand("red.update", () => redCompileUpdate()));
 	context.subscriptions.push(vscode.commands.registerCommand("red.commandMenu", setCommandMenu));
+	console.log("isIntelligence", config.isIntelligence);
+	if (!config.isIntelligence) {return;}
 
 	console.log("Red console path: ", config.redConsole);
 	let serverModule = path.join(context.asAbsolutePath("."), "server", "server.red");

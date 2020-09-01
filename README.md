@@ -21,13 +21,15 @@ An extension with rich support for the [Red language](https://www.red-lang.org/)
 
 ![download](https://raw.githubusercontent.com/red/VScode-extension/0.4.1/images/download.png)
 
-### 3. Turn off the Auto Completion
+### 3. Turn on/off the intelligence feature
 
-  You can turn off the autocompletion in the **User or Workspace Settings file (settings.json)** as follows.
+You can turn on/off the intelligence feature in the **User or Workspace Settings file (settings.json)** as follows.
 
-  ```
-  "red.autocomplete": false
-  ```
+For Example, turn off it:
+
+```
+"red.intelligence": false
+```
 
 ## Compile Red Source File
 
@@ -76,8 +78,8 @@ The following Visual Studio Code settings are available for the Red extension.  
     // Directory to put compiling result of Red Source file.
     "red.buildDir": "",
 
-    // Whether to enable or disable autocompletion.
-    "red.autoComplete": true
+    // Whether to enable or disable intelligence.
+    "red.intelligence": true
 }
 ```
 

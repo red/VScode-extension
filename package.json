@@ -212,10 +212,10 @@
 					"default": [],
 					"description": "Advanced options used to enable new features or produce detailed diagnostics to identify extension issues."
 				},
-				"red.autoComplete": {
+				"red.intelligence": {
 					"type": "boolean",
 					"default": true,
-					"description": "Whether to enable or disable autocompletion."
+					"description": "Whether to enable or disable intelligence."
 				},
 				"red.rls-debug": {
 					"type": "boolean",

@@ -61,8 +61,8 @@ export class RedConfiguration {
 	public static getInstance(): RedConfiguration {
 		return RedConfiguration.redConfigs;
 	}
-	public get isAutoComplete(): boolean {
-		return this.configuration.get<boolean>('red.autoComplete', true);
+	public get isIntelligence(): boolean {
+		return this.configuration.get<boolean>('red.intelligence', true);
 	}
 
 	public get needRlsDebug(): boolean {
