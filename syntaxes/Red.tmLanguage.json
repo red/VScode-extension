@@ -208,8 +208,13 @@
 			"match": "[^\\s\\n:/\\[\\]\\(\\)]+@[^\\s\\n:/\\[\\]\\(\\)]+",
 			"name": "string.email.red"
 		},
+		"string-rawstring": {
+			"begin": "(%+){",
+			"end": "}(%+)",
+			"name": "string.other.red"
+		},
 		"string-file": {
-			"match": "%[^\\s\\n\\[\\]\\(\\)]*",
+			"match": "%[^\\s\\n\\[\\]\\(\\)\\{\\}]*",
 			"name": "string.other.file.red"
 		},
 		"string-file-quoted": {
@@ -335,6 +340,9 @@
 				},
 				{
 					"include": "#string-quoted"
+				},
+				{
+					"include": "#string-rawstring"
 				},
 				{
 					"include": "#string-multiline"
