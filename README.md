@@ -11,14 +11,17 @@ An extension with rich support for the [Red language](https://www.red-lang.org/)
 
 ## Quick Start
 
-* Install the extension
-* Install [Red](http://www.red-lang.org/p/download.html) (Note: For Windows user, need to run ```red.exe --cli```)
+### 1. Install the extension
+### 2. Install [Red](http://www.red-lang.org/p/download.html)
 
-![download](https://cdn.jsdelivr.net/gh/red/VScode-extension@0.4.0/images/download.png)
+**Note**:
 
-  **Note**: latest automated build version should be installed for `0.3.x`, and this extension not worked with last stable version
+* For Windows user, need to run ```red.exe --cli```
+* latest automated build version should be installed for `0.4.x`, and this extension not worked with last stable version
 
-* Turn off the Auto Completion
+![download](https://cdn.jsdelivr.net/gh/red/VScode-extension/images/download.png)
+
+### 3. Turn off the Auto Completion
 
   You can turn off the autocompletion in the **User or Workspace Settings file (settings.json)** as follows.
 
@@ -94,27 +97,27 @@ The following commands are available for the Red extension. These can be associa
 
 * diagnostics
 
-![Image of Completions](https://cdn.jsdelivr.net/gh/red/VScode-extension@0.4.0/images/diagnostics.gif)
+![Image of Completions](https://cdn.jsdelivr.net/gh/red/VScode-extension/images/diagnostics.gif)
 
 * auto completion
 
-![Image of Completions](https://cdn.jsdelivr.net/gh/red/VScode-extension@0.4.0/images/completion.gif)
+![Image of Completions](https://cdn.jsdelivr.net/gh/red/VScode-extension/images/completion.gif)
 
 * goto definition
 
-![Image of Goto Definition](https://cdn.jsdelivr.net/gh/red/VScode-extension@0.4.0/images/goto-definition.gif)
+![Image of Goto Definition](https://cdn.jsdelivr.net/gh/red/VScode-extension/images/goto-definition.gif)
 
 * navigate to any symbol definition
 
-![Image of Goto Definition](https://cdn.jsdelivr.net/gh/red/VScode-extension@0.4.0/images/goto-symbols.gif)
+![Image of Goto Definition](https://cdn.jsdelivr.net/gh/red/VScode-extension/images/goto-symbols.gif)
 
 * hover to view signatures
 
-![Image of Goto Definition](https://cdn.jsdelivr.net/gh/red/VScode-extension@0.4.0/images/hover.gif)
+![Image of Goto Definition](https://cdn.jsdelivr.net/gh/red/VScode-extension/images/hover.gif)
 
 * Interpret or compile Red source file
 
-![Image of Red Command Menu](https://cdn.jsdelivr.net/gh/red/VScode-extension@0.4.0/images/redmenu.gif)
+![Image of Red Command Menu](https://cdn.jsdelivr.net/gh/red/VScode-extension/images/redmenu.gif)
 
 
 ## [Issues, Feature Requests and Contributions](https://github.com/red/VScode-extension/issues)
