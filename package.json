@@ -2,7 +2,7 @@
 	"name": "red",
 	"displayName": "Red",
 	"description": "Syntax Coloring, Intellisense, Snippets and more",
-	"version": "0.4.1",
+	"version": "0.4.2",
 	"publisher": "red-auto",
 	"license": "BSL-1.0",
 	"homepage": "https://github.com/red/VScode-extension/blob/master/README.md",

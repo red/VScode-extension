@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.4.2
+
+### new feature
+
+* syntax highlight for raw string!
+* `red/system support` is back
+
 ## 0.4.1
 
 ### new features
