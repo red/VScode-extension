@@ -38,7 +38,7 @@ function execCommand(command: string, args: string) {
 
 	terminal = terminal ? terminal : vscode.window.createTerminal(`Red`);
 	if (process.platform === 'win32') {
-		text = "cmd /c \"";
+		text = "cmd --% /c \"";
 	}
 	text = text + "\"" + command + "\"";
 	text = text + " " + args;
