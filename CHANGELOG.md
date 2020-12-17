@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.4.3
+
+### Bug fixes
+
+* merge PR #48 Fix command syntax for win32 platform
+* fix a typo in the syntax highlighting file
+
 ## 0.4.2
 
 ### new feature

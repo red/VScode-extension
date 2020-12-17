@@ -30,8 +30,11 @@ For Example, turn off it:
 ```
 "red.intelligence": false
 ```
+That's all. 
 
-## Compile Red Source File
+If you want to compile the source file, do the following settings.
+
+---
 
 ### Specify the full path of the red toolchain
 
@@ -43,7 +46,7 @@ For compiling Red source file, you need to configure the path to the Red toolcha
 
 For Windows user: `c:/work/red/red.exe` or `c:\\work\\red\\red.exe` or `c:\work\red\red.exe` will all be accepted.
 
-### Specify the full path
+### Specify the output folder
 
 You can also configure the directory for output files of the compiler. The current work space (project) directory is used by default.
 
