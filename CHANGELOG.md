@@ -1,5 +1,21 @@
 # Changelog
 
+## 0.4.4
+
+### New features
+
+* syntax highlighting for `ref!` literals
+* numbers and pairs are now highlighted in paths and refinements
+* more builtins are now highlighted
+* proper syntax highlighting for `raw-string!` literals
+
+### Bug fixes
+
+* fixed typos in syntax highlighting rule names
+* `'` and other special characters in words are now properly highlighted
+* decimal value in `time!` literals is now highlighted
+* characters are now properly highlighted
+
 ## 0.4.3
 
 ### Bug fixes
