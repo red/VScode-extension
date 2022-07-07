@@ -8,6 +8,7 @@
 * numbers and pairs are now highlighted in paths and refinements
 * more builtins are now highlighted
 * proper syntax highlighting for `raw-string!` literals
+* binary literals can now be multiline and support comments
 
 ### Bug fixes
 
