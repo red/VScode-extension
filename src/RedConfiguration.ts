@@ -48,10 +48,13 @@ function findExecutable(exe: string) {
 }
 
 function getRedConsole(gui: boolean) {
-	let name = 'red';
-	if (gui) {name = 'red-view';}
-	let exe = findExecutable(name);
-	if (exe !== '') {return exe;}
+	if (process.platform === 'win32') {
+		// There is a `red` program on Linux already
+		let name = 'red';
+		if (gui) {name = 'red-view';}
+		let exe = findExecutable(name);
+		if (exe !== '') {return exe;}
+	}
 
 	let preBuiltPath: string;
 	if (process.platform === 'win32') {
@@ -85,7 +88,8 @@ function getRedConsole(gui: boolean) {
 				}
 			}
 		}
-		return path.join(preBuiltPath, _console);
+		let exe = path.join(preBuiltPath, _console);
+		return checkFileExists(exe) ? exe : '';
 	}
 	catch (err) {
 		return '';

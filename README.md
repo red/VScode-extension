@@ -11,16 +11,8 @@ An extension with rich support for the [Red Programming language](https://www.re
 ## Quick Start
 
 1. Install the extension
-2. Add [CLI Red](https://www.red-lang.org/p/download.html) binary into your system's $PATH or set the `red.redPath` in the `Settings`.
-
----
-**NOTE**
-
-It doesn't work with the `red-view.exe`.
-
-Please download the `red-xxx-xxxxxxx.exe`, rename it to `red.exe`, add it into the $PATH. 
-
----
+2. Download [CLI Red](https://www.red-lang.org/p/download.html) and set the `red.redPath` in the `Settings`
+3. Restart VS Code 
 
 ## Settings
 
@@ -35,7 +27,12 @@ In order to compile Red source file, you need to configure the path to the Red t
 ---
 **NOTE**
 
-You can also set the paths for `red` and `red-view`. The plugin will use the one you specified instead of the one find in the system $PATH. 
+You can also set the paths for `red` and `red-view`.
+
+```
+"red.redPath": "/home/user1/tools/red"
+"red.redViewPath": "/home/user1/tools/red-view"
+```
 
 ---
 

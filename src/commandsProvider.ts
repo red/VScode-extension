@@ -81,6 +81,14 @@ function redRunScript(gui: boolean, fileUri?: vscode.Uri) {
 	filePath = "\"" + filePath + "\"";
 
 	let redTool = gui ? redConfigs.redGuiConsole : redConfigs.redConsole;
+	if (redTool === '') {
+		if (gui) {
+			vscode.window.showErrorMessage('No Red View! Please set the `red.redViewPath` in `settings.json`');
+		} else {
+			vscode.window.showErrorMessage('No Red Interpreter! Please set the `red.redPath` in `settings.json`');
+		}
+		return;
+	}
 	let command = normalFile(redTool);
 	execCommand(command, filePath);
 }
@@ -89,7 +97,7 @@ function redCompileScript(mode: string, fileUri?: vscode.Uri) {
 	let redConfigs = RedConfiguration.getInstance();
 	let redTool = redConfigs.redToolChain;
 	if (redTool === '') {
-		vscode.window.showErrorMessage('No Red compiler! Please configure the `red.redToolChainPath` in `settings.json`');
+		vscode.window.showErrorMessage('No Red compiler! Please set the `red.redToolChainPath` in `settings.json`');
 		return;
 	}
 	let filePath = getFileName(fileUri);
