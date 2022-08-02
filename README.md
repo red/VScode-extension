@@ -1,8 +1,7 @@
 # VSCode extension for [Red](https://www.red-lang.org/)
 
-An extension with rich support for the [Red language](https://www.red-lang.org/), with features including the following and more:
+An extension with rich support for the [Red Programming language](https://www.red-lang.org/), with features including the following and more:
 
-* hint all syntax errors
 * auto completion
 * goto definition
 * navigate to any symbol definition
@@ -11,40 +10,34 @@ An extension with rich support for the [Red language](https://www.red-lang.org/)
 
 ## Quick Start
 
-### 1. Install the extension
-### 2. Install [Red](http://www.red-lang.org/p/download.html)
+1. Install the extension
+2. Add [CLI Red](https://www.red-lang.org/p/download.html) binary into your system's $PATH or set the `red.redPath` in the `Settings`.
 
-**Note**:
+---
+**NOTE**
 
-* For Windows user, need to run ```red.exe --cli```
-* latest automated build version should be installed for `0.4.x`, and this extension not worked with last stable version
+It doesn't work with the `red-view.exe`.
 
-![download](https://raw.githubusercontent.com/red/VScode-extension/0.4.1/images/download.png)
-
-### 3. Turn on/off the intelligence feature
-
-You can turn on/off the intelligence feature in the **User or Workspace Settings file (settings.json)** as follows.
-
-For Example, turn off it:
-
-```
-"red.intelligence": false
-```
-That's all. 
-
-If you want to compile the source file, do the following settings.
+Please download the `red-xxx-xxxxxxx.exe`, rename it to `red.exe`, add it into the $PATH. 
 
 ---
 
+## Settings
+
 ### Specify the full path of the red toolchain
 
-For compiling Red source file, you need to configure the path to the Red toolchain in the **User or Workspace Settings file (settings.json)** as follows.
+In order to compile Red source file, you need to configure the path to the Red toolchain in the `Settings`.
 
-  ```
-  "red.redPath": "/home/user1/tools/red-latest"
-  ```
+```
+"red.redToolChainPath": "/home/user1/tools/red-toolchain"
+```
 
-For Windows user: `c:/work/red/red.exe` or `c:\\work\\red\\red.exe` or `c:\work\red\red.exe` will all be accepted.
+---
+**NOTE**
+
+You can also set the paths for `red` and `red-view`. The plugin will use the one you specified instead of the one find in the system $PATH. 
+
+---
 
 ### Specify the output folder
 
@@ -57,9 +50,6 @@ You can also configure the directory for output files of the compiler. The curre
   "red.buildDir": "/home/user1/debug"
   ```
 
-
-If you are using Linux and prefer to use the Windows version of Red through Wine until GUI support is available for Linux, you can point `red.redPath` to a small [shell script](https://github.com/red/red/wiki/Visual-Studio-Code-Plugin#running-red-through-wine-on-linux).
-
 ## Shortcuts
 
 | Key                       | Command                           | Command id         |
@@ -69,22 +59,6 @@ If you are using Linux and prefer to use the Windows version of Red through Wine
 | <kbd>F7</kbd>             | Compile Current Red File          | red.compile        |
 | <kbd>Ctrl+K Ctrl+M</kbd>  | Show Red Command Menu             | red.commandMenu    |
 
-## Configurations
-
-The following Visual Studio Code settings are available for the Red extension.  These can be set in user preferences or workspace settings.
-
-```javascript
-{
-    // Path to Red toolchain
-    "red.redPath": "",
-
-    // Directory to put compiling result of Red Source file.
-    "red.buildDir": "",
-
-    // Whether to enable or disable intelligence.
-    "red.intelligence": true
-}
-```
 
 The following commands are available for the Red extension. These can be associated with keyboard shortcuts via the `keybindings.json` file.
 * To configure keyboard shortcuts the way you want, go to the menu under **File > Preferences > Keyboard Shortcuts**. (**Code > Preferences > Keyboard Shortcuts** on Mac)
@@ -94,15 +68,15 @@ The following commands are available for the Red extension. These can be associa
     { "key": "f6",                    "command": "red.interpret" },
     { "key": "ctrl+f6",               "command": "red.interpretGUI" },
     { "key": "f7",                    "command": "red.compile" },
+    { "key": "unset",                 "command": "red.compileReleaseGUI" },
+    { "key": "unset",                 "command": "red.compileReleaseCLI" },
+    { "key": "unset",                 "command": "red.clear" },
+    { "key": "unset",                 "command": "red.update" },
     { "key": "ctrl+k ctrl+m",         "command": "red.commandMenu" },
 ]
 ```
 
 ## Feature Screenshots
-
-* diagnostics
-
-![Image of Completions](https://raw.githubusercontent.com/red/VScode-extension/0.4.1/images/diagnostics.gif)
 
 * auto completion
 
