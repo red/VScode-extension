@@ -2,7 +2,7 @@
 	"name": "red",
 	"displayName": "Red",
 	"description": "Syntax Coloring, Intellisense, Snippets and more",
-	"version": "0.4.3",
+	"version": "0.4.4",
 	"publisher": "red-auto",
 	"license": "BSL-1.0",
 	"homepage": "https://github.com/red/VScode-extension/blob/master/README.md",
@@ -28,11 +28,10 @@
 		"onCommand:red.interpret",
 		"onCommand:red.interpretGUI",
 		"onCommand:red.compile",
-		"onCommand:red.compileGUI",
-		"onCommand:red.compileRelease",
+		"onCommand:red.compileReleaseCLI",
+		"onCommand:red.compileReleaseGUI",
 		"onCommand:red.clear",
-		"onCommand:red.update",
-		"onCommand:reds.compile"
+		"onCommand:red.update"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
@@ -94,18 +93,18 @@
 				"category": "Red"
 			},
 			{
-				"command": "red.compileGUI",
-				"title": "Compile Current Script (GUI mode)",
+				"command": "red.compileReleaseGUI",
+				"title": "Compile Current Script (GUI release mode)",
 				"category": "Red"
 			},
 			{
-				"command": "red.compileRelease",
-				"title": "Compile Current Script (Release mode)",
+				"command": "red.compileReleaseCLI",
+				"title": "Compile Current Script (CLI release mode)",
 				"category": "Red"
 			},
 			{
 				"command": "red.clear",
-				"title": "Delete all temporary files (libRedRT, etc)",
+				"title": "Delete all libRedRT related files",
 				"category": "Red"
 			},
 			{
@@ -151,7 +150,7 @@
 				},
 				{
 					"when": "resourceLangId == red",
-					"command": "red.compileRelease",
+					"command": "red.compileReleaseCLI",
 					"group": "Red"
 				},
 				{
@@ -178,7 +177,7 @@
 				},
 				{
 					"when": "resourceLangId == red",
-					"command": "red.compileRelease",
+					"command": "red.compileReleaseCLI",
 					"group": "Red"
 				},
 				{
@@ -190,17 +189,27 @@
 		},
 		"configuration": {
 			"type": "object",
-			"title": "Red Configuration",
+			"title": "Red",
 			"properties": {
 				"red.redPath": {
 					"type": "string",
 					"default": "",
-					"description": "Path to Red toolchain"
+					"description": "Path to `red` executable file"
+				},
+				"red.redViewPath": {
+					"type": "string",
+					"default": "",
+					"description": "Path to `red-view` executable file"
+				},
+				"red.redToolChainPath": {
+					"type": "string",
+					"default": "",
+					"description": "Path to `red-toolchain` executable file"
 				},
 				"red.excludedPath": {
 					"type": "string",
 					"default": "tests/",
-					"description": "sub-folders be excluded"
+					"description": "Sub-folders be excluded"
 				},
 				"red.buildDir": {
 					"type": "string",
@@ -255,7 +264,7 @@
 		"glob": "^7.1.6",
 		"mocha": "^8.1.3",
 		"typescript": "^4.0.2",
-		"vscode-test": "^1.4.0"
+		"@vscode/test-electron": "^1.4.0"
 	},
 	"dependencies": {
 		"vscode-languageclient": "^6.1.3"

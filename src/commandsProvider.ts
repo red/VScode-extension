@@ -38,7 +38,8 @@ function execCommand(command: string, args: string) {
 
 	terminal = terminal ? terminal : vscode.window.createTerminal(`Red`);
 	if (process.platform === 'win32') {
-		if (vscode.window.activeTerminal.name !== 'bash') {
+		const activeTerm = vscode.window.activeTerminal;
+		if (activeTerm !== undefined && activeTerm.name !== 'bash') {
 			text = "cmd --% /c \"";
 		}
 	}
@@ -71,227 +72,92 @@ function getFileName(fileUri?: vscode.Uri): string {
 	return filePath;
 }
 
-export function redRunInConsole(fileUri?: vscode.Uri) {
+function redRunScript(gui: boolean, fileUri?: vscode.Uri) {
 	let redConfigs = RedConfiguration.getInstance();
-	let redTool = redConfigs.redToolChain;
 	let filePath = getFileName(fileUri);
 	if (filePath === '') {return;}
-	let ext = path.parse(filePath).ext.toLowerCase();
-	if (ext !== ".red") {
-		vscode.window.showErrorMessage("don't support " + ext + " file");
-		return;
-	}
+
 	filePath = normalFile(filePath);
 	filePath = "\"" + filePath + "\"";
 
-	let command: string;
-	let args: string;
-	if (redTool === '') {
-		command = redConfigs.redConsole;
-		args = filePath;
-	} else {
-		command = redTool;
-		args = "--cli " + filePath;
-	}
-	command = normalFile(command);
+	let redTool = gui ? redConfigs.redGuiConsole : redConfigs.redConsole;
+	let command = normalFile(redTool);
+	execCommand(command, filePath);
+}
 
+function redCompileScript(mode: string, fileUri?: vscode.Uri) {
+	let redConfigs = RedConfiguration.getInstance();
+	let redTool = redConfigs.redToolChain;
+	if (redTool === '') {
+		vscode.window.showErrorMessage('No Red compiler! Please configure the `red.redToolChainPath` in `settings.json`');
+		return;
+	}
+	let filePath = getFileName(fileUri);
+
+	if (mode === "clear") {
+		let buildDir = getBuildDir(filePath);
+		buildDir = normalFile(buildDir);
+		if (!buildDir.endsWith("/")) {
+			buildDir = buildDir.concat("/");
+		}
+		buildDir = "\"" + buildDir + "\"";
+		let args = "clear " + buildDir;
+		let command = normalFile(redTool);
+		execCommand(command, args);
+		return;
+	}
+
+	if (filePath === '') {return;}
+
+	let buildDir = getBuildDir(filePath);
+	let outName = getOutFileName(buildDir, filePath);
+	outName = normalFile(outName);
+	outName = "\"" + outName + "\"";
+
+	filePath = normalFile(filePath);
+	filePath = "\"" + filePath + "\"";
+
+	let command = normalFile(redTool);
+	// dev mode
+	let args = "-c -o " + outName + " " + filePath;
+	
+	if (mode === "release-gui") {
+		let target = getTarget();
+		args = "-r -t " + target + " -o " + outName + " " + filePath;
+	} else if (mode === "release-cli") {
+		args = "-r -o " + outName + " " + filePath;
+	} else if (mode === "update") {
+		args = "-u -o " + outName + " " + filePath;
+	}
 	execCommand(command, args);
+}
+
+export function redRunInConsole(fileUri?: vscode.Uri) {
+	redRunScript(false, fileUri);
 }
 
 export function redRunInGuiConsole(fileUri?: vscode.Uri) {
-	let redConfigs = RedConfiguration.getInstance();
-	let redTool = redConfigs.redToolChain;
-	let filePath = getFileName(fileUri);
-	if (filePath === '') {return;}
-	let ext = path.parse(filePath).ext.toLowerCase();
-	if (ext !== ".red") {
-		vscode.window.showErrorMessage("don't support " + ext + " file");
-		return;
-	}
-	filePath = normalFile(filePath);
-	filePath = "\"" + filePath + "\"";
-
-	let command: string;
-	let args: string;
-	if (redTool === '') {
-		command = redConfigs.redGuiConsole;
-		args = filePath;
-	} else {
-		command = redTool;
-		args = filePath;
-	}
-	command = normalFile(command);
-
-	execCommand(command, args);
+	redRunScript(true, fileUri);
 }
 
-export function redCompileInConsole(fileUri?: vscode.Uri) {
-	let redConfigs = RedConfiguration.getInstance();
-	let redTool = redConfigs.redToolChain;
-	if (redTool === '') {
-		vscode.window.showErrorMessage('No Red compiler! Please configure the `red.redPath` in `settings.json`');
-		return;
-	}
-	let filePath = getFileName(fileUri);
-	if (filePath === '') {return;}
-	let ext = path.parse(filePath).ext.toLowerCase();
-	if (ext === ".reds") {
-		redsCompile(fileUri);
-		return;
-	}
-	if (ext !== ".red") {
-		vscode.window.showErrorMessage("don't support " + ext + " file");
-		return;
-	}
-
-	let buildDir = getBuildDir(filePath);
-	let outName = getOutFileName(buildDir, filePath);
-	outName = normalFile(outName);
-	outName = "\"" + outName + "\"";
-
-	filePath = normalFile(filePath);
-	filePath = "\"" + filePath + "\"";
-
-	let command= redTool;
-	let args = "-c -o " + outName + " " + filePath;
-	command = normalFile(command);
-	execCommand(command, args);
+export function redCompileDev(fileUri?: vscode.Uri) {
+	redCompileScript("dev", fileUri);
 }
 
-export function redCompileInGuiConsole(fileUri?: vscode.Uri) {
-	let redConfigs = RedConfiguration.getInstance();
-	let redTool = redConfigs.redToolChain;
-	if (redTool === '') {
-		vscode.window.showErrorMessage('No Red compiler! Please configure the `red.redPath` in `settings.json`');
-		return;
-	}
-	let filePath = getFileName(fileUri);
-	if (filePath === '') {return;}
-	let ext = path.parse(filePath).ext.toLowerCase();
-	if (ext !== ".red") {
-		vscode.window.showErrorMessage("don't support " + ext + " file");
-		return;
-	}
-
-	let buildDir = getBuildDir(filePath);
-	let outName = getOutFileName(buildDir, filePath);
-	let target = getTarget();
-	outName = normalFile(outName);
-	outName = "\"" + outName + "\"";
-
-	filePath = normalFile(filePath);
-	filePath = "\"" + filePath + "\"";
-
-	let command= redTool;
-	let args = "-c -t " + target + " -o " + outName + " " + filePath;
-	command = normalFile(command);
-	execCommand(command, args);
+export function redCompileReleaseGui(fileUri?: vscode.Uri) {
+	redCompileScript("release-gui", fileUri);
 }
 
-export function redCompileInRelease(fileUri?: vscode.Uri) {
-	let redConfigs = RedConfiguration.getInstance();
-	let redTool = redConfigs.redToolChain;
-	if (redTool === '') {
-		vscode.window.showErrorMessage('No Red compiler! Please configure the `red.redPath` in `settings.json`');
-		return;
-	}
-	let filePath = getFileName(fileUri);
-	if (filePath === '') {return;}
-	let ext = path.parse(filePath).ext.toLowerCase();
-	if (ext !== ".red") {
-		vscode.window.showErrorMessage("don't support " + ext + " file");
-		return;
-	}
-
-	let buildDir = getBuildDir(filePath);
-	let outName = getOutFileName(buildDir, filePath);
-	let target = getTarget();
-	outName = normalFile(outName);
-	outName = "\"" + outName + "\"";
-
-	filePath = normalFile(filePath);
-	filePath = "\"" + filePath + "\"";
-
-	let command= redTool;
-	let args = "-r -t " + target + " -o " + outName + " " + filePath;
-	command = normalFile(command);
-	execCommand(command, args);
+export function redCompileReleaseCli(fileUri?: vscode.Uri) {
+	redCompileScript("release-cli", fileUri);
 }
 
 export function redCompileClear(fileUri?: vscode.Uri) {
-	let redConfigs = RedConfiguration.getInstance();
-	let redTool = redConfigs.redToolChain;
-	if (redTool === '') {
-		vscode.window.showErrorMessage('No Red compiler! Please configure the `red.redPath` in `settings.json`');
-		return;
-	}
-	let filePath = getFileName(fileUri);
-	let buildDir = getBuildDir(filePath);
-	buildDir = normalFile(buildDir);
-	buildDir = "\"" + buildDir + "\"";
-
-	let command= redTool;
-	let args = "clear " + buildDir;
-	command = normalFile(command);
-	execCommand(command, args);
+	redCompileScript("clear", fileUri);
 }
 
 export function redCompileUpdate(fileUri?: vscode.Uri) {
-	let redConfigs = RedConfiguration.getInstance();
-	let redTool = redConfigs.redToolChain;
-	if (redTool === '') {
-		vscode.window.showErrorMessage('No Red compiler! Please configure the `red.redPath` in `settings.json`');
-		return;
-	}
-	let filePath = getFileName(fileUri);
-	if (filePath === '') {return;}
-	let ext = path.parse(filePath).ext.toLowerCase();
-	if (ext !== ".red") {
-		vscode.window.showErrorMessage("don't support " + ext + " file");
-		return;
-	}
-
-	let buildDir = getBuildDir(filePath);
-	let outName = getOutFileName(buildDir, filePath);
-	outName = normalFile(outName);
-	outName = "\"" + outName + "\"";
-
-	filePath = normalFile(filePath);
-	filePath = "\"" + filePath + "\"";
-
-	let command= redTool;
-	let args = "-u -c -o " + outName + " " + filePath;
-	command = normalFile(command);
-	execCommand(command, args);
-}
-
-function redsCompile(fileUri?: vscode.Uri) {
-	let redConfigs = RedConfiguration.getInstance();
-	let redTool = redConfigs.redToolChain;
-	if (redTool === '') {
-		vscode.window.showErrorMessage('No Red compiler! Please configure the `red.redPath` in `settings.json`');
-		return;
-	}
-	let filePath = getFileName(fileUri);
-	if (filePath === '') {return;}
-	let ext = path.parse(filePath).ext.toLowerCase();
-	if (ext !== ".reds") {
-		vscode.window.showErrorMessage("don't support " + ext + " file");
-		return;
-	}
-
-	let buildDir = getBuildDir(filePath);
-	let outName = getOutFileName(buildDir, filePath);
-	outName = normalFile(outName);
-	outName = "\"" + outName + "\"";
-
-	filePath = normalFile(filePath);
-	filePath = "\"" + filePath + "\"";
-
-	let command= redTool;
-	let args = "-r -o " + outName + " " + filePath;
-	command = normalFile(command);
-	execCommand(command, args);
+	redCompileScript("update", fileUri);
 }
 
 export function setCommandMenu() {
@@ -307,22 +173,22 @@ export function setCommandMenu() {
 			command: 'red.interpretGUI'
 		},
 		{
-			label: 'Compile Current Script',
+			label: 'Compile Current Script (Dev mode)',
 			description: '',
 			command: 'red.compile'
 		},
 		{
-			label: 'Compile Current Script (GUI mode)',
+			label: 'Compile Current Script (GUI Release mode)',
 			description: '',
-			command: 'red.compileGUI'
+			command: 'red.compileReleaseGUI'
 		},
 		{
-			label: 'Compile Current Script (Release mode)',
+			label: 'Compile Current Script (CLI Release mode)',
 			description: '',
-			command: 'red.compileRelease'
+			command: 'red.compileReleaseCLI'
 		},
 		{
-			label: 'Delete all temporary files (libRedRT, etc)',
+			label: 'Delete all libRedRT related files',
 			description: '',
 			command: 'red.clear'
 		},

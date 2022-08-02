@@ -17,6 +17,11 @@
 * decimal value in `time!` literals is now highlighted
 * characters are now properly highlighted
 
+### Changed
+
+* update settings and commands for new Red binaries
+* disable syntax error report due to too many false alarms
+
 ## 0.4.3
 
 ### Bug fixes

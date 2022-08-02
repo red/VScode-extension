@@ -16,7 +16,43 @@ function folderExists(path: fs.PathLike)
 	}
 }
 
+function checkFileExists(filePath: fs.PathLike) {
+	try {
+		return (fs.statSync(filePath)).isFile();
+	} catch (err) {
+		return false;
+	}
+}
+
+/**
+ * @param {string} exe executable name (without extension if on Windows)
+ * @return {string|null} executable path if found
+ * */
+function findExecutable(exe: string) {
+    const envPath = process.env.PATH || "";
+	let ext: string;
+	if (process.platform === 'win32') {
+    	ext = ".exe";
+	} else {
+		ext = "";
+	}
+    const pathDirs = envPath
+        .replace(/["]+/g, "")
+        .split(path.delimiter)
+        .filter(Boolean);
+    const candidates = pathDirs.map((d) => path.join(d, exe + ext));
+    for (let i in candidates) {	
+		if (checkFileExists(candidates[i])) {return candidates[i];};
+	}
+	return '';
+}
+
 function getRedConsole(gui: boolean) {
+	let name = 'red';
+	if (gui) {name = 'red-view';}
+	let exe = findExecutable(name);
+	if (exe !== '') {return exe;}
+
 	let preBuiltPath: string;
 	if (process.platform === 'win32') {
 		preBuiltPath = path.join(process.env.ALLUSERSPROFILE || "c:", 'Red');
@@ -69,8 +105,17 @@ export class RedConfiguration {
 		return this.configuration.get<boolean>('red.rls-debug', false);
 	}
 
-	public get redToolChain(): string {
+	public get redCore(): string {
 		return this.configuration.get<string>('red.redPath', '');
+	}
+
+	public get redView(): string {
+		return this.configuration.get<string>('red.redViewPath', '');
+	}
+
+	public get redToolChain(): string {
+		let path = this.configuration.get<string>('red.redToolChainPath', '');
+		return path === '' ? findExecutable("red-toolchain") : path;
 	}
 
 	public get redExcludedPath(): string { 
@@ -78,11 +123,13 @@ export class RedConfiguration {
 	}
 
 	public get redConsole(): string {
-		return getRedConsole(false);
+		let path = this.redCore;
+		return path === '' ? getRedConsole(false) : path; 
 	}
 
 	public get redGuiConsole(): string {
-		return getRedConsole(true);
+		let path = this.redView;
+		return path === '' ? getRedConsole(true) : path;
 	}
 
 	public get redWorkSpace(): string {

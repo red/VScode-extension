@@ -3,7 +3,7 @@
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
 import {RedConfiguration} from  './RedConfiguration';
-import {redRunInConsole, redRunInGuiConsole, redCompileInConsole, redCompileInGuiConsole, setCommandMenu, redCompileInRelease, redCompileClear, redCompileUpdate} from './commandsProvider';
+import * as cmds from './commandsProvider';
 import * as vscodelc from 'vscode-languageclient';
 import * as path from 'path';
 
@@ -14,14 +14,14 @@ let reddClient: vscodelc.LanguageClient;
 export function activate(context: vscode.ExtensionContext) {
 	let config = RedConfiguration.getInstance();
 
-	context.subscriptions.push(vscode.commands.registerCommand("red.interpret", () => redRunInConsole()));
-	context.subscriptions.push(vscode.commands.registerCommand("red.interpretGUI", () => redRunInGuiConsole()));
-	context.subscriptions.push(vscode.commands.registerCommand("red.compile", () => redCompileInConsole()));
-	context.subscriptions.push(vscode.commands.registerCommand("red.compileGUI", () => redCompileInGuiConsole()));
-	context.subscriptions.push(vscode.commands.registerCommand("red.compileRelease", () => redCompileInRelease()));
-	context.subscriptions.push(vscode.commands.registerCommand("red.clear", () => redCompileClear()));
-	context.subscriptions.push(vscode.commands.registerCommand("red.update", () => redCompileUpdate()));
-	context.subscriptions.push(vscode.commands.registerCommand("red.commandMenu", setCommandMenu));
+	context.subscriptions.push(vscode.commands.registerCommand("red.interpret", () => cmds.redRunInConsole()));
+	context.subscriptions.push(vscode.commands.registerCommand("red.interpretGUI", () => cmds.redRunInGuiConsole()));
+	context.subscriptions.push(vscode.commands.registerCommand("red.compile", () => cmds.redCompileDev()));
+	context.subscriptions.push(vscode.commands.registerCommand("red.compileReleaseGUI", () => cmds.redCompileReleaseGui()));
+	context.subscriptions.push(vscode.commands.registerCommand("red.compileReleaseCLI", () => cmds.redCompileReleaseCli()));
+	context.subscriptions.push(vscode.commands.registerCommand("red.clear", () => cmds.redCompileClear()));
+	context.subscriptions.push(vscode.commands.registerCommand("red.update", () => cmds.redCompileUpdate()));
+	context.subscriptions.push(vscode.commands.registerCommand("red.commandMenu", cmds.setCommandMenu));
 	console.log("isIntelligence", config.isIntelligence);
 	if (!config.isIntelligence) {return;}
 
