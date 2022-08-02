@@ -1,3 +1,3 @@
 [submodule "server"]
 	path = server
-	url = https://github.com/bitbegin/redlangserver.git
+	url = https://github.com/red/redlangserver.git
