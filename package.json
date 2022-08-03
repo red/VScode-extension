@@ -191,6 +191,11 @@
 			"type": "object",
 			"title": "Red",
 			"properties": {
+				"red.redDir": {
+					"type": "string",
+					"default": "",
+					"description": "Path to red binaries directory"
+				},
 				"red.redPath": {
 					"type": "string",
 					"default": "",
@@ -224,12 +229,12 @@
 				"red.intelligence": {
 					"type": "boolean",
 					"default": true,
-					"description": "Whether to enable or disable intelligence."
+					"description": "Check it to enable IntelliSence"
 				},
 				"red.rls-debug": {
 					"type": "boolean",
 					"default": false,
-					"description": "Whether to enable or disable 'Red language server' debug."
+					"description": "Check it to enable 'Red language server' debug"
 				},
 				"red.server.trace.server": {
 					"scope": "window",

@@ -8,44 +8,53 @@ An extension with rich support for the [Red Programming language](https://www.re
 * hover to view signatures
 * Interpret or compile Red source file
 
-## Quick Start
-
-1. Install the extension
-2. Download [CLI Red](https://www.red-lang.org/p/download.html) and set the `red.redPath` in the `Settings`
-3. Restart VS Code 
-
 ## Settings
 
-### Specify the full path of the red toolchain
-
-In order to compile Red source file, you need to configure the path to the Red toolchain in the `Settings`.
-
-```
-"red.redToolChainPath": "/home/user1/tools/red-toolchain"
-```
+To enable features like IntelliSense, you need to configure the path to the Red binaries in the `Settings`.
 
 ---
 **NOTE**
 
-You can also set the paths for `red` and `red-view`.
+Restart the VS Code to take effect after changing the `Settings`.
+
+---
+
+### Set the search path of the red binaries
+
+Download the [Red binaries](https://www.red-lang.org/p/download.html) to a local folder, then set the `red.redDir` to it. The plugin will use the latest one according to the filename. 
+
+```
+"red.redDir": "D:/Tools/Red/"
+```
+
+### Set the full path of the red binaries
+
+If you want to use a specified version of Red binaries, use the following settings:
 
 ```
 "red.redPath": "/home/user1/tools/red"
 "red.redViewPath": "/home/user1/tools/red-view"
+"red.redToolChainPath": "/home/user1/tools/red-toolchain"
 ```
 
----
-
-### Specify the output folder
+### Set the output folder
 
 You can also configure the directory for output files of the compiler. The current work space (project) directory is used by default.
 
 (**Note**: If no work space directory, the output files are in the same folder as the Red source file.)
 
 
-  ```
-  "red.buildDir": "/home/user1/debug"
-  ```
+```
+"red.buildDir": "/home/user1/debug"
+```
+
+### Turn off the IntelliSense
+
+In case that you don't like this fancy feature. ;)
+
+```
+"red.intelligence": false
+```
 
 ## Shortcuts
 

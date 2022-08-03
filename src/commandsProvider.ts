@@ -36,7 +36,18 @@ function normalFile(value: string): string {
 function execCommand(command: string, args: string) {
 	let text: string = "";
 
-	terminal = terminal ? terminal : vscode.window.createTerminal(`Red`);
+	for (let t of vscode.window.terminals) {
+		if (t.name === 'Red') {
+			terminal = t;
+			break;
+		}
+	}
+
+	terminal = terminal ? terminal : vscode.window.createTerminal('Red');
+	if (terminal && terminal.exitStatus) {	// killed by the user
+		terminal.dispose();
+		terminal = vscode.window.createTerminal('Red');
+	}
 	if (process.platform === 'win32') {
 		const activeTerm = vscode.window.activeTerminal;
 		if (activeTerm !== undefined && activeTerm.name !== 'bash') {
@@ -46,7 +57,7 @@ function execCommand(command: string, args: string) {
 	text = text + "\"" + command + "\"";
 	text = text + " " + args;
 	terminal.sendText(text);
-	terminal.show();
+	terminal.show(true);	// do not take the focus
 }
 
 function getFileName(fileUri?: vscode.Uri): string {
@@ -85,7 +96,7 @@ function redRunScript(gui: boolean, fileUri?: vscode.Uri) {
 		if (gui) {
 			vscode.window.showErrorMessage('No Red View! Please set the `red.redViewPath` in `settings.json`');
 		} else {
-			vscode.window.showErrorMessage('No Red Interpreter! Please set the `red.redPath` in `settings.json`');
+			vscode.window.showErrorMessage('No Red CLI! Please set the `red.redPath` in `settings.json`');
 		}
 		return;
 	}

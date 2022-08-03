@@ -1,6 +1,6 @@
 'use strict';
 
-import { workspace, WorkspaceConfiguration } from 'vscode';
+import { window, workspace, WorkspaceConfiguration } from 'vscode';
 import * as path from 'path';
 import * as fs from 'fs';
 
@@ -16,11 +16,86 @@ function folderExists(path: fs.PathLike)
 	}
 }
 
-function checkFileExists(filePath: fs.PathLike) {
+function checkFileExists(filePath: fs.PathLike, checkExec: boolean = false) {
 	try {
-		return (fs.statSync(filePath)).isFile();
+		let isfile = fs.statSync(filePath).isFile();
+		if (!isfile) {
+			window.showErrorMessage('Cannot access file: ' + filePath);
+		}
+		if (checkExec && isfile) {
+			if (!isExec(filePath)) {
+				window.showErrorMessage('Not an executable: ' + filePath);
+				return false;
+			}
+			return true;
+		} else {
+			return isfile;
+		}
 	} catch (err) {
 		return false;
+	}
+}
+
+function isExec(p: fs.PathLike) {
+	try {
+	  fs.accessSync(p, fs.constants.X_OK);
+	  return true;
+	} catch (e) {
+	  return false;
+	}
+}
+
+function parseDate(date: string) {
+	const months = [
+		'jan', 'feb', 'mar', 'apr', 'may', 'jun',
+		'jul', 'aug', 'sep', 'oct', 'nov', 'dec'
+	];
+
+	const day = Number(date.slice(0,2));
+	const month = months.indexOf(date.slice(2,5).toLowerCase());
+	const year = Number(date.slice(5,7));
+	if (Number.isNaN(year) || Number.isNaN(day) || month === -1) {
+		return undefined;
+	}
+	return new Date(year, month, day);
+}
+
+function searchRedTool(name: string, searchPath: string) {
+	try {
+		const expectExt = process.platform === 'win32' ? '.exe' : '';
+		let files = fs.readdirSync(searchPath);
+		let tool = '';
+		let toolDate = new Date(1800, 0);
+		let startsWith = name + '-';
+		for (let f of files) {
+			let ext = path.extname(f);
+			let parts = path.basename(f, ext).slice(startsWith.length).split("-");
+			if (f.startsWith(startsWith) && parts.length === 2 && parts[0].length === 7 && ext === expectExt) {
+				let fpath = path.join(searchPath, f);
+				let date = parseDate(parts[0]);
+				let d = fs.statSync(fpath).mtime;
+				if (date !== undefined) {
+					date.setHours(d.getHours(), d.getMinutes(), d.getSeconds());
+					if (tool === '') {
+						toolDate = date;
+						tool = fpath;
+					} else {
+						if (date > toolDate) {
+							toolDate = date;
+							tool = fpath;
+						}
+					}
+				}
+			}
+		}
+		if (tool === '') {
+			tool = path.join(searchPath, name + expectExt);
+			if (!fs.statSync(tool).isFile()) {return '';};
+		}
+		return tool;
+	}
+	catch (err) {
+		return '';
 	}
 }
 
@@ -28,30 +103,47 @@ function checkFileExists(filePath: fs.PathLike) {
  * @param {string} exe executable name (without extension if on Windows)
  * @return {string|null} executable path if found
  * */
-function findExecutable(exe: string) {
-    const envPath = process.env.PATH || "";
+function findExecutable(exe: string, searchPath: string = '') {
+	let useOSPath = false;
+	if (searchPath === '') {
+		useOSPath = true;
+		searchPath = process.env.PATH || "";
+	}
 	let ext: string;
 	if (process.platform === 'win32') {
     	ext = ".exe";
 	} else {
 		ext = "";
 	}
-    const pathDirs = envPath
+    const pathDirs = searchPath
         .replace(/["]+/g, "")
         .split(path.delimiter)
         .filter(Boolean);
-    const candidates = pathDirs.map((d) => path.join(d, exe + ext));
-    for (let i in candidates) {	
-		if (checkFileExists(candidates[i])) {return candidates[i];};
+
+	if (useOSPath) {
+		const candidates = pathDirs.map((d) => path.join(d, exe + ext));
+		for (let i in candidates) {	
+			if (checkFileExists(candidates[i], true)) {return candidates[i];};
+		}
+	} else {
+		for (let dir of pathDirs) {
+			let tool = searchRedTool(exe, dir);
+			if (tool !== '') {
+				return checkFileExists(tool, true) ? tool : '';
+			}
+		}
 	}
 	return '';
 }
 
-function getRedConsole(gui: boolean) {
+function getRedTool(name: string, toolDir: string = '', gui: boolean = false) {
+	if (toolDir !== '') {
+		let exe = findExecutable(name, toolDir);
+		if (exe !== '') {return exe;}
+	}
+
 	if (process.platform === 'win32') {
 		// There is a `red` program on Linux already
-		let name = 'red';
-		if (gui) {name = 'red-view';}
 		let exe = findExecutable(name);
 		if (exe !== '') {return exe;}
 	}
@@ -88,8 +180,10 @@ function getRedConsole(gui: boolean) {
 				}
 			}
 		}
+		if (_console === '') {return '';}
+
 		let exe = path.join(preBuiltPath, _console);
-		return checkFileExists(exe) ? exe : '';
+		return checkFileExists(exe, true) ? exe : '';
 	}
 	catch (err) {
 		return '';
@@ -109,17 +203,32 @@ export class RedConfiguration {
 		return this.configuration.get<boolean>('red.rls-debug', false);
 	}
 
+	public get redDir(): string {
+		return this.configuration.get<string>('red.redDir', '');
+	}
+
 	public get redCore(): string {
-		return this.configuration.get<string>('red.redPath', '');
+		let exe = this.configuration.get<string>('red.redPath', '');
+		if (exe !== '' && !checkFileExists(exe, true)) {
+			return '';
+		}
+		return exe;
 	}
 
 	public get redView(): string {
-		return this.configuration.get<string>('red.redViewPath', '');
+		let exe = this.configuration.get<string>('red.redViewPath', '');
+		if (exe !== '' && !checkFileExists(exe, true)) {
+			return '';
+		}
+		return exe;
 	}
 
 	public get redToolChain(): string {
 		let path = this.configuration.get<string>('red.redToolChainPath', '');
-		return path === '' ? findExecutable("red-toolchain") : path;
+		if (path !== '' && !checkFileExists(path, true)) {
+			return '';
+		}
+		return path === '' ? findExecutable("red-toolchain", this.redDir) : path;
 	}
 
 	public get redExcludedPath(): string { 
@@ -128,12 +237,12 @@ export class RedConfiguration {
 
 	public get redConsole(): string {
 		let path = this.redCore;
-		return path === '' ? getRedConsole(false) : path; 
+		return path === '' ? getRedTool("red", this.redDir) : path; 
 	}
 
 	public get redGuiConsole(): string {
 		let path = this.redView;
-		return path === '' ? getRedConsole(true) : path;
+		return path === '' ? getRedTool("red-view", this.redDir, true) : path;
 	}
 
 	public get redWorkSpace(): string {
