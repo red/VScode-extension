@@ -10,7 +10,11 @@ An extension with rich support for the [Red Programming language](https://www.re
 
 ## Settings
 
-To enable features like IntelliSense, you need to configure the path to the Red binaries in the `Settings`.
+### Set the Red binaries
+
+To enable features like IntelliSense, you need to configure the path to the [Red binaries](https://www.red-lang.org/p/download.html) in the `Settings`.
+
+There are two ways to do it. Details are as follows.
 
 ---
 **NOTE**
@@ -19,7 +23,7 @@ Restart the VS Code to take effect after changing the `Settings`.
 
 ---
 
-### Set the search path of the red binaries
+### 1. Set the search path of the red binaries
 
 Download the [Red binaries](https://www.red-lang.org/p/download.html) to a local folder, then set the `red.redDir` to it. The plugin will use the latest one according to the filename. 
 
@@ -27,7 +31,7 @@ Download the [Red binaries](https://www.red-lang.org/p/download.html) to a local
 "red.redDir": "D:/Tools/Red/"
 ```
 
-### Set the full path of the red binaries
+### 2. Set the full path of the red binaries
 
 If you want to use a specified version of Red binaries, use the following settings:
 

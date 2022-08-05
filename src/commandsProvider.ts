@@ -33,27 +33,31 @@ function normalFile(value: string): string {
 	return value.replace(/\\/g, '/');
 }
 
+function createTerm(name: string) {
+	if (process.platform === 'win32') {
+		return vscode.window.createTerminal(name, 'cmd');
+	} else {
+		return vscode.window.createTerminal(name);
+	}
+}
+
 function execCommand(command: string, args: string) {
+	const termName = 'Red';
 	let text: string = "";
 
 	for (let t of vscode.window.terminals) {
-		if (t.name === 'Red') {
+		if (t.name === termName) {
 			terminal = t;
 			break;
 		}
 	}
 
-	terminal = terminal ? terminal : vscode.window.createTerminal('Red');
+	terminal = terminal ? terminal : createTerm(termName);
 	if (terminal && terminal.exitStatus) {	// killed by the user
 		terminal.dispose();
-		terminal = vscode.window.createTerminal('Red');
+		terminal = createTerm(termName);
 	}
-	if (process.platform === 'win32') {
-		const activeTerm = vscode.window.activeTerminal;
-		if (activeTerm !== undefined && activeTerm.name !== 'bash') {
-			text = "cmd --% /c \"";
-		}
-	}
+
 	text = text + "\"" + command + "\"";
 	text = text + " " + args;
 	terminal.sendText(text);
