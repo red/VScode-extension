@@ -1,4 +1,4 @@
-# VSCode extension for [Red](https://www.red-lang.org/)
+# VSCode extensions for [Red Programming language](https://www.red-lang.org/)
 
 An extension with rich support for the [Red Programming language](https://www.red-lang.org/), with features including the following and more:
 
