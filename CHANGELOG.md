@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.4.5
+
+### Changed
+
+* update for new map syntax
+
 ## 0.4.4
 
 ### New features
