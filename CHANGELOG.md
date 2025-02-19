@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.4.6
+
+### Bug fixes
+
+* fix server crash due to a bug in lexer
+
 ## 0.4.5
 
 ### Changed
