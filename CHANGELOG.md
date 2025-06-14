@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.4.8
+* bump version
+
+## 0.4.7
+* fix build script on CI
+
 ## 0.4.6
 
 ### Bug fixes
