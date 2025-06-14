@@ -1,6 +1,7 @@
 .vscode/**
 .vscode-test/**
 out/test/**
+server/tests/**
 src/**
 .gitignore
 vsc-extension-quickstart.md
@@ -8,3 +9,4 @@ vsc-extension-quickstart.md
 **/.eslintrc.json
 **/*.map
 **/*.ts
+**/*.gif
