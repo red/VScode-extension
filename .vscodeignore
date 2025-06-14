@@ -2,6 +2,8 @@
 .vscode-test/**
 out/test/**
 server/tests/**
+server/*.png
+server/.gitignore
 src/**
 .gitignore
 vsc-extension-quickstart.md
